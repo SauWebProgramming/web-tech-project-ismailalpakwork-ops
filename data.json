@@ -1,0 +1,29 @@
+[
+  {
+    "id": 1,
+    "title": "Inception",
+    "year": 2010,
+    "category": "Bilim Kurgu",
+    "rating": 8.8,
+    "description": "Zihin hırsızlığı yapan bir casusun hikayesi.",
+    "image": "https://picsum.photos/seed/inception/200/300"
+  },
+  {
+    "id": 2,
+    "title": "The Dark Knight",
+    "year": 2008,
+    "category": "Aksiyon",
+    "rating": 9.0,
+    "description": "Batman, Joker'e karşı şehri savunuyor.",
+    "image": "https://picsum.photos/seed/batman/200/300"
+  },
+  {
+    "id": 3,
+    "title": "Interstellar",
+    "year": 2014,
+    "category": "Bilim Kurgu",
+    "rating": 8.6,
+    "description": "Uzayda zamanla yarışan bir babanın hikayesi.",
+    "image": "https://picsum.photos/seed/space/200/300"
+  }
+]
