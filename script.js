@@ -99,3 +99,12 @@ document.getElementById('searchInput').addEventListener('input', (e) => {
 document.getElementById('favBtn').onclick = showFavorites;
 
 getMovies();
+function sortByRating() {
+    const sorted = [...allMovies].sort((a, b) => b.rating - a.rating);
+    renderMovies(sorted);
+}
+
+function sortByYear() {
+    const sorted = [...allMovies].sort((a, b) => b.year - a.year);
+    renderMovies(sorted);
+}
