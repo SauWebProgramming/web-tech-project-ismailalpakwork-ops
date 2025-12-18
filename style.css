@@ -1,172 +1,80 @@
 :root {
-    --primary-color: #e50914; /* Netflix kırmızısı gibi canlı bir renk */
-    --bg-color: #141414;
-    --card-bg: #1f1f1f;
-    --text-color: #ffffff;
-    --transition: all 0.3s ease;
-}
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
+    --primary: #e50914;
+    --dark: #0f0f0f;
+    --surface: #1a1a1a;
+    --text: #ffffff;
+    --text-dim: #b3b3b3;
 }
 
 body {
-    background-color: var(--bg-color);
-    color: var(--text-color);
-    line-height: 1.6;
+    background-color: var(--dark);
+    color: var(--text);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
 }
 
-/* Navigasyon - Modern ve Sabit */
+/* Navbar */
 nav {
+    background: linear-gradient(to bottom, rgba(0,0,0,0.8) 0%, transparent 100%);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem 5%;
-    background: rgba(0, 0, 0, 0.8);
-    backdrop-filter: blur(10px);
+    padding: 20px 5%;
     position: sticky;
     top: 0;
-    z-index: 1000;
-    border-bottom: 1px solid #333;
-}
-
-.logo {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: var(--primary-color);
-    text-transform: uppercase;
-    letter-spacing: 2px;
+    z-index: 100;
 }
 
 #searchInput {
-    background: #2b2b2b;
-    border: 1px solid #444;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid #333;
     color: white;
     padding: 10px 20px;
-    border-radius: 20px;
-    width: 300px;
-    outline: none;
-    transition: var(--transition);
+    border-radius: 4px;
+    width: 250px;
 }
 
-#searchInput:focus {
-    border-color: var(--primary-color);
-    width: 350px;
-}
-
-#favBtn {
-    background: var(--primary-color);
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-weight: 600;
-    transition: var(--transition);
-}
-
-#favBtn:hover {
-    background: #b20710;
-    transform: scale(1.05);
-}
-
-/* Grid Yapısı */
+/* Film Kartları */
 .grid-container {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-    gap: 30px;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 25px;
     padding: 40px 5%;
 }
 
-/* Kart Tasarımı (Hover Animasyonlu) */
 .card {
-    background: var(--card-bg);
-    border-radius: 12px;
+    background: var(--surface);
+    border-radius: 8px;
     overflow: hidden;
+    transition: transform 0.3s ease;
+    cursor: pointer;
     position: relative;
-    transition: var(--transition);
-    border: 1px solid #333;
 }
 
 .card:hover {
-    transform: translateY(-10px);
-    border-color: var(--primary-color);
-    box-shadow: 0 10px 20px rgba(229, 9, 20, 0.2);
+    transform: scale(1.05);
 }
 
 .card img {
     width: 100%;
-    height: 320px;
+    height: 300px;
     object-fit: cover;
-    display: block;
 }
 
-.card-body {
+.card-info {
     padding: 15px;
 }
 
-.card h3 {
-    font-size: 1rem;
-    margin-bottom: 8px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.card p {
-    font-size: 0.85rem;
-    color: #aaa;
-}
-
 /* Butonlar */
-.btn-detail {
-    background: transparent;
-    border: 1px solid #fff;
+.btn-fav {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: rgba(0,0,0,0.6);
+    border: none;
     color: white;
-    width: 100%;
-    padding: 8px;
-    margin-top: 10px;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
     cursor: pointer;
-    border-radius: 4px;
-    transition: var(--transition);
-}
-
-.btn-detail:hover {
-    background: white;
-    color: black;
-}
-
-/* Detay Sayfası Tasarımı */
-.detail-page {
-    animation: fadeIn 0.5s ease;
-    padding: 40px 5%;
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-/* Footer */
-footer {
-    text-align: center;
-    padding: 40px;
-    color: #666;
-    border-top: 1px solid #333;
-    margin-top: 50px;
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-    nav {
-        flex-direction: column;
-        gap: 15px;
-        padding: 20px;
-    }
-    #searchInput {
-        width: 100%;
-    }
 }
