@@ -3,24 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Medya Kitaplığı SPA</title>
+    <title>SineSistem | Premium Medya Platformu</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
     <header>
         <nav>
-            <div class="logo">SineSistem</div>
+            <div class="logo" onclick="location.reload()" style="cursor:pointer">SineSistem</div>
             <div class="search-area">
-    <input type="text" id="searchInput" placeholder="Film ara...">
-    <div class="sort-controls" style="margin-top: 10px;">
-        <button onclick="sortByRating()">⭐ Puana Göre</button>
-        <button onclick="sortByYear()">📅 Yıla Göre</button>
-    </div>
-</div>
-            <button id="favBtn">Favorilerim</button>
+                <input type="text" id="searchInput" placeholder="Film ara...">
+                <div class="sort-controls" style="margin-top: 10px;">
+                    <button onclick="sortByRating()">⭐ Puana Göre</button>
+                    <button onclick="sortByYear()">📅 Yıla Göre</button>
+                </div>
+            </div>
+            <button id="favBtn">❤️ Favorilerim</button>
         </nav>
     </header>
+
+    <div id="hero" class="hero-section">
+        <div class="hero-content">
+            <h1 id="hero-title">Interstellar</h1>
+            <p id="hero-desc">İnsanlığın yeni bir ev arayışında solucan deliği yolculuğu. Görsel bir şölen ve derin bir hikaye.</p>
+            <div class="hero-btns">
+                <button class="play-btn">▶ Oynat</button>
+                <button class="info-btn" onclick="showDetails(1)">ℹ Daha Fazla Bilgi</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="category-filters">
+        <button class="filter-btn active" onclick="filterByCategory('Tümü')">Tümü</button>
+        <button class="filter-btn" onclick="filterByCategory('Bilim Kurgu')">Bilim Kurgu</button>
+        <button class="filter-btn" onclick="filterByCategory('Dizi')">Diziler</button>
+        <button class="filter-btn" onclick="filterByCategory('Aksiyon')">Aksiyon</button>
+    </div>
 
     <main id="main-content">
         <section id="movieList" class="grid-container"></section>
