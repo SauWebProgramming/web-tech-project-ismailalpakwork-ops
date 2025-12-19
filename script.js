@@ -3,8 +3,8 @@ let allMovies = [];
 // 1. Veriyi çekme (Fetch API & Async/Await)
 const getMovies = async () => {
     try {
-        const response = await fetch('data.json'); // [cite: 10, 49]
-        allMovies = await response.json(); // [cite: 50]
+        const response = await fetch('data.json'); 
+        allMovies = await response.json(); 
         renderMovies(allMovies);
     } catch (error) {
         console.error("Veri yüklenemedi:", error);
@@ -21,27 +21,30 @@ const renderMovies = (movies) => {
         card.className = 'card';
         card.innerHTML = `
             <img src="${movie.image}" alt="${movie.title}">
-            <h3>${movie.title}</h3>
-            <p>${movie.year} | ⭐ ${movie.rating}</p>
-            <button onclick="showDetails(${movie.id})">Detayları Gör</button>
-            <button onclick="addToFavorites(${movie.id})" style="background:#e74c3c; color:white; border:none; margin-top:5px; padding:5px; cursor:pointer;">❤️ Favori</button>
+            <div class="card-info">
+                <h3>${movie.title}</h3>
+                <p>${movie.year} | ⭐ ${movie.rating}</p>
+                <button onclick="showDetails(${movie.id})">Detayları Gör</button>
+                <button onclick="addToFavorites(${movie.id})" style="background:#e74c3c; color:white; border:none; margin-top:5px; padding:5px; cursor:pointer;">❤️ Favori</button>
+            </div>
         `;
         list.appendChild(card);
     });
 };
 
-// 3. Detay Sayfası (SPA Mantığı) [cite: 26, 29]
+// 3. Detay Sayfası (SPA Mantığı - GÜNCELLENDİ)
 const showDetails = (id) => {
     const movie = allMovies.find(m => m.id === id);
     const mainContent = document.getElementById('main-content');
     
-    // URL'yi güncelleme (Ödev gereksinimi) [cite: 33, 34]
+    // URL'yi güncelleme
     window.location.hash = `movie-${id}`;
 
     mainContent.innerHTML = `
-        <div class="detail-page" style="padding:20px; background:white; border-radius:10px;">
-            <button onclick="location.reload()">← Ana Sayfaya Dön</button>
-            <div style="display: flex; gap: 20px; margin-top: 20px; flex-wrap: wrap;">
+        <div class="detail-page" style="padding:20px; background:#1f1f1f; color:white; border-radius:10px;">
+            <button onclick="window.location.hash=''; renderMovies(allMovies)" style="margin-bottom:20px; cursor:pointer;">← Ana Sayfaya Dön</button>
+            
+            <div style="display: flex; gap: 20px; flex-wrap: wrap;">
                 <img src="${movie.image}" style="width: 250px; border-radius: 10px;">
                 <div style="flex: 1; min-width: 300px;">
                     <h2>${movie.title}</h2>
@@ -75,7 +78,7 @@ const showFavorites = () => {
     
     mainContent.innerHTML = `
         <div style="padding:20px;">
-            <button onclick="location.reload()">← Geri Dön</button>
+            <button onclick="window.location.hash=''; renderMovies(allMovies)" style="cursor:pointer;">← Geri Dön</button>
             <h2 style="margin-top:20px;">Favorilerim</h2>
             <div id="movieList" class="grid-container"></div>
         </div>
@@ -95,10 +98,7 @@ document.getElementById('searchInput').addEventListener('input', (e) => {
     renderMovies(filtered);
 });
 
-// Favoriler butonuna tıklama olayı
-document.getElementById('favBtn').onclick = showFavorites;
-
-getMovies();
+// 6. Sıralama Fonksiyonları
 function sortByRating() {
     const sorted = [...allMovies].sort((a, b) => b.rating - a.rating);
     renderMovies(sorted);
@@ -108,3 +108,8 @@ function sortByYear() {
     const sorted = [...allMovies].sort((a, b) => b.year - a.year);
     renderMovies(sorted);
 }
+
+// Favoriler butonuna tıklama olayı
+document.getElementById('favBtn').onclick = showFavorites;
+
+getMovies();
