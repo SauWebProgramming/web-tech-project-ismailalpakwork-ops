@@ -1,29 +1,47 @@
 [
   {
     "id": 1,
-    "title": "Inception",
-    "year": 2010,
+    "title": "Interstellar",
+    "year": 2014,
+    "rating": 8.7,
     "category": "Bilim Kurgu",
-    "rating": 8.8,
-    "description": "Zihin hırsızlığı yapan bir casusun hikayesi.",
-    "image": "https://picsum.photos/seed/inception/200/300"
+    "image": "https://image.tmdb.org/t/p/w500/gEU2vRrbCn3pZz6IBt2qC4CiaO8.jpg",
+    "description": "İnsanlığın geleceği tehlikedeyken astronotlar yeni bir gezegen arar."
   },
-  {   
+  {
     "id": 2,
-    "title": "The Dark Knight",
-    "year": 2008,
-    "category": "Aksiyon",
-    "rating": 9.0,
-    "description": "Batman, Joker'e karşı şehri savunuyor.",
-    "image": "https://picsum.photos/seed/batman/200/300"
+    "title": "Spider-Man: Across the Spider-Verse",
+    "year": 2023,
+    "rating": 8.9,
+    "category": "Animasyon",
+    "image": "https://image.tmdb.org/t/p/w500/8Vtpi9pR71SjC4I6SbiaqCBETm2.jpg",
+    "description": "Miles Morales çoklu evrende diğer Örümcek-İnsanlarla tanışır."
   },
   {
     "id": 3,
-    "title": "Interstellar",
-    "year": 2014,
-    "category": "Bilim Kurgu",
-    "rating": 8.6,
-    "description": "Uzayda zamanla yarışan bir babanın hikayesi.",
-    "image": "https://picsum.photos/seed/space/200/300"
+    "title": "The Last of Us",
+    "year": 2023,
+    "rating": 8.8,
+    "category": "Dizi / Dram",
+    "image": "https://image.tmdb.org/t/p/w500/uKvH5jS1L4B9vQYpQIY1vSvOX6v.jpg",
+    "description": "Modern bir salgının mahvettiği bir dünyada Joel ve Ellie'nin hayatta kalma savaşı."
+  },
+  {
+    "id": 4,
+    "title": "Oppenheimer",
+    "year": 2023,
+    "rating": 8.4,
+    "category": "Biyografi",
+    "image": "https://image.tmdb.org/t/p/w500/8GxvA9zDZUGwhQpS3y8vM7McYdz.jpg",
+    "description": "Atom bombasının babası J. Robert Oppenheimer'ın hikayesi."
+  },
+  {
+    "id": 5,
+    "title": "Blade Runner 2049",
+    "year": 2017,
+    "rating": 8.0,
+    "category": "Bilim Kurgu / Cyberpunk",
+    "image": "https://image.tmdb.org/t/p/w500/g9979wsEbS2eYvOARvC98pYySyr.jpg",
+    "description": "Yeni bir Blade Runner, toplumdan geriye kalanı kaosa sürükleme potansiyeli olan bir sırrı keşfeder."
   }
 ]
