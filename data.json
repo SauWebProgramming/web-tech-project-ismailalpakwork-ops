@@ -5,8 +5,8 @@
     "year": 2010,
     "rating": 8.8,
     "category": "Bilim Kurgu",
-    "image": "https://image.tmdb.org/t/p/w500/edv5bs1pXdfS2S17UTMbjLpUXrA.jpg",
-    "description": "Zihin hırsızlığı yapan bir casusun imkansız bir başlangıç görevi."
+    "image": "https://m.media-amazon.com/images/I/91Rc8cAmnAL.jpg",
+    "description": "Rüyaların içinde geçen akıl almaz bir aksiyon hikayesi."
   },
   {
     "id": 2,
@@ -14,8 +14,8 @@
     "year": 2008,
     "rating": 9.0,
     "category": "Aksiyon",
-    "image": "https://image.tmdb.org/t/p/w500/qJ2tW6WMUDp9QmSqvms9pU9OR9L.jpg",
-    "description": "Gotham'ın koruyucusu Joker'in kaosuna karşı adalet arıyor."
+    "image": "https://play-lh.googleusercontent.com/auIs5tjWlLYaFPGClZOJ7m5YVbnX6uBvz0X02r8TkwFKdzE53ww2MqWSS9gU0YNqoYwvpg",
+    "description": "Batman'in Joker ile olan unutulmaz mücadelesi."
   },
   {
     "id": 3,
@@ -23,34 +23,251 @@
     "year": 2014,
     "rating": 8.7,
     "category": "Bilim Kurgu",
-    "image": "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/gEU2vRrbCn3pZz6IBt2qC4CiaO8.jpg",
-    "description": "İnsanlığın yeni bir ev arayışında solucan deliği yolculuğu."
+    "image": "https://m.media-amazon.com/images/I/91obuWzA3XL.jpg",
+    "description": "İnsanlığın geleceği için yapılan uzay yolculuğu."
   },
   {
     "id": 4,
-    "title": "Spider-Verse",
-    "year": 2023,
-    "rating": 8.9,
-    "category": "Animasyon",
-    "image": "https://image.tmdb.org/t/p/w500/8Vtpi9pR71SjC4I6SbiaqCBETm2.jpg",
-    "description": "Miles Morales'in çoklu evrende yeni bir macera dolu yolculuğu."
+    "title": "Fight Club",
+    "year": 1999,
+    "rating": 8.8,
+    "category": "Dram",
+    "image": "https://m.media-amazon.com/images/M/MV5BOTgyOGQ1NDItNGU3Ny00MjU3LTg2YWEtNmEyYjBiMjI1Y2M5XkEyXkFqcGc@._V1_.jpg",
+    "description": "Modern toplum ve kimlik üzerine çarpıcı bir hikâye."
   },
   {
     "id": 5,
-    "title": "Oppenheimer",
-    "year": 2023,
-    "rating": 8.4,
-    "category": "Biyografi",
-    "image": "https://image.tmdb.org/t/p/w500/8GxvA9zDZUGwhQpS3y8vM7McYdz.jpg",
-    "description": "Atom bombasının babası J. Robert Oppenheimer'ın hayatı."
+    "title": "Forrest Gump",
+    "year": 1994,
+    "rating": 8.8,
+    "category": "Dram",
+    "image": "https://m.media-amazon.com/images/M/MV5BNDYwNzVjMTItZmU5YS00YjQ5LTljYjgtMjY2NDVmYWMyNWFmXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg",
+    "description": "Sıradan bir adamın olağanüstü hayat hikayesi."
   },
   {
     "id": 6,
+    "title": "The Matrix",
+    "year": 1999,
+    "rating": 8.7,
+    "category": "Bilim Kurgu",
+    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRfSjSWOCaw5dnDL2GT1zFd9RMCgUGw5Q2Cfg&s",
+    "description": "Gerçekliğin sorgulandığı siberpunk bir evren."
+  },
+  {
+    "id": 7,
+    "title": "Gladiator",
+    "year": 2000,
+    "rating": 8.5,
+    "category": "Tarih",
+    "image": "https://m.media-amazon.com/images/M/MV5BMjgyMDM1MGQtMjNmMy00ZTExLWJhMmQtNDMxMTVmMzEyZDk0XkEyXkFqcGc@._V1_.jpg",
+    "description": "Bir generalin intikam yolculuğu."
+  },
+  {
+    "id": 8,
+    "title": "The Shawshank Redemption",
+    "year": 1994,
+    "rating": 9.3,
+    "category": "Dram",
+    "image": "https://m.media-amazon.com/images/M/MV5BMDAyY2FhYjctNDc5OS00MDNlLThiMGUtY2UxYWVkNGY2ZjljXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg",
+    "description": "Umut ve özgürlük üzerine etkileyici bir hapishane hikayesi."
+  },
+  {
+    "id": 9,
+    "title": "Pulp Fiction",
+    "year": 1994,
+    "rating": 8.9,
+    "category": "Suç",
+    "image": "https://m.media-amazon.com/images/M/MV5BYTViYTE3ZGQtNDBlMC00ZTAyLTkyODMtZGRiZDg0MjA2YThkXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg",
+    "description": "Birbirine bağlı suç hikâyeleri."
+  },
+  {
+    "id": 10,
+    "title": "Titanic",
+    "year": 1997,
+    "rating": 7.9,
+    "category": "Romantik",
+    "image": "https://m.media-amazon.com/images/M/MV5BYTAyOTE3MjItODljMi00ZjhjLTkyYmEtMTkzOGE1YzgzMjg0XkEyXkFqcGc@._V1_.jpg",
+    "description": "Efsanevi gemide yaşanan büyük bir aşk."
+  },
+  {
+    "id": 11,
+    "title": "Avatar",
+    "year": 2009,
+    "rating": 7.8,
+    "category": "Bilim Kurgu",
+    "image": "https://m.media-amazon.com/images/M/MV5BM2RiNGMzM2QtMzkyNi00OGYyLWE5MTctNDRkOTRkZmI5ZGJlXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg",
+    "description": "Pandora gezegeninde geçen epik bir macera."
+  },
+  {
+    "id": 12,
+    "title": "Joker",
+    "year": 2019,
+    "rating": 8.4,
+    "category": "Psikolojik",
+    "image": "https://m.media-amazon.com/images/M/MV5BNzY3OWQ5NDktNWQ2OC00ZjdlLThkMmItMDhhNDk3NTFiZGU4XkEyXkFqcGc@._V1_.jpg",
+    "description": "Toplum tarafından dışlanan bir adamın dönüşümü."
+  },
+  {
+    "id": 13,
+    "title": "The Godfather",
+    "year": 1972,
+    "rating": 9.2,
+    "category": "Suç",
+    "image": "https://m.media-amazon.com/images/M/MV5BNGEwYjgwOGQtYjg5ZS00Njc1LTk2ZGEtM2QwZWQ2NjdhZTE5XkEyXkFqcGc@._V1_.jpg",
+    "description": "Bir mafya ailesinin yükselişi ve düşüşü."
+  },
+  {
+    "id": 14,
+    "title": "Avengers: Endgame",
+    "year": 2019,
+    "rating": 8.4,
+    "category": "Aksiyon",
+    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRaw6QTsDE3d6-qOL5xMa4-JDdBNTa3uspCrg&s",
+    "description": "Marvel evreninin büyük finali."
+  },
+  {
+    "id": 15,
+    "title": "The Lord of the Rings: The Return of the King",
+    "year": 2003,
+    "rating": 9.0,
+    "category": "Fantastik",
+    "image": "https://m.media-amazon.com/images/M/MV5BMTZkMjBjNWMtZGI5OC00MGU0LTk4ZTItODg2NWM3NTVmNWQ4XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg",
+    "description": "Orta Dünya’da verilen son savaş."
+  },
+  {
+    "id": 16,
+    "title": "Parasite",
+    "year": 2019,
+    "rating": 8.5,
+    "category": "Gerilim",
+    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcyJYd_sWzQdj87gwIiDRpi6JtzfY6-XLG-w&s",
+    "description": "Sınıf çatışmasını anlatan çarpıcı bir hikâye."
+  },
+  {
+    "id": 17,
+    "title": "Whiplash",
+    "year": 2014,
+    "rating": 8.5,
+    "category": "Dram",
+    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGmbQETJm7Snnx9FIBgcUgaOlkumF8Njt55Q&s",
+    "description": "Mükemmellik takıntısı üzerine sert bir hikâye."
+  },
+  {
+    "id": 18,
+    "title": "Django Unchained",
+    "year": 2012,
+    "rating": 8.4,
+    "category": "Western",
+    "image": "https://m.media-amazon.com/images/M/MV5BMjIyNTQ5NjQ1OV5BMl5BanBnXkFtZTcwODg1MDU4OA@@._V1_FMjpg_UX1000_.jpg",
+    "description": "Özgürlüğünü arayan bir kölenin intikamı."
+  },
+  {
+    "id": 19,
+    "title": "The Social Network",
+    "year": 2010,
+    "rating": 7.7,
+    "category": "Biyografi",
+    "image": "https://m.media-amazon.com/images/M/MV5BMjlkNTE5ZTUtNGEwNy00MGVhLThmZjMtZjU1NDE5Zjk1NDZkXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg",
+    "description": "Facebook'un kuruluş hikâyesi."
+  },
+  {
+    "id": 20,
+    "title": "Mad Max: Fury Road",
+    "year": 2015,
+    "rating": 8.1,
+    "category": "Aksiyon",
+    "image": "https://m.media-amazon.com/images/M/MV5BZDRkODJhOTgtOTc1OC00NTgzLTk4NjItNDgxZDY4YjlmNDY2XkEyXkFqcGc@._V1_.jpg",
+    "description": "Çılgın bir post-apokaliptik kovalamaca."
+  },
+
+  {
+    "id": 21,
+    "title": "Breaking Bad",
+    "year": 2008,
+    "rating": 9.5,
+    "category": "Suç",
+    "image": "https://m.media-amazon.com/images/M/MV5BMzU5ZGYzNmQtMTdhYy00OGRiLTg0NmQtYjVjNzliZTg1ZGE4XkEyXkFqcGc@._V1_QL75_UX190_CR0,2,190,281_.jpg",
+    "description": "Bir kimya öğretmeninin uyuşturucu imparatorluğuna dönüşü."
+  },
+  {
+    "id": 22,
+    "title": "Game of Thrones",
+    "year": 2011,
+    "rating": 9.2,
+    "category": "Fantastik",
+    "image": "https://m.media-amazon.com/images/M/MV5BMTNhMDJmNmYtNDQ5OS00ODdlLWE0ZDAtZTgyYTIwNDY3OTU3XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg",
+    "description": "Taht mücadelesi ve ejderhalarla dolu bir dünya."
+  },
+  {
+    "id": 23,
     "title": "The Last of Us",
     "year": 2023,
     "rating": 8.8,
-    "category": "Dizi",
-    "image": "https://image.tmdb.org/t/p/w500/uKvH5jS1L4B9vQYpQIY1vSvOX6v.jpg",
-    "description": "Modern bir salgının ortasında hayatta kalma mücadelesi."
+    "category": "Dram",
+    "image": "https://m.media-amazon.com/images/I/61cwT2tdAFL._AC_UF894,1000_QL80_.jpg",
+    "description": "Kıyamet sonrası hayatta kalma mücadelesi."
+  },
+  {
+    "id": 24,
+    "title": "Sherlock",
+    "year": 2010,
+    "rating": 9.1,
+    "category": "Dedektif",
+    "image": "https://m.media-amazon.com/images/M/MV5BNTQzNGZjNDEtOTMwYi00MzFjLWE2ZTYtYzYxYzMwMjZkZDc5XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg",
+    "description": "Modern zamanların Sherlock Holmes'u."
+  },
+  {
+    "id": 25,
+    "title": "Stranger Things",
+    "year": 2016,
+    "rating": 8.7,
+    "category": "Bilim Kurgu",
+    "image": "https://m.media-amazon.com/images/M/MV5BMjg2NmM0MTEtYWY2Yy00NmFlLTllNTMtMjVkZjEwMGVlNzdjXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg",
+    "description": "Gizemli olaylar ve alternatif bir evren."
+  },
+  {
+    "id": 26,
+    "title": "The Witcher",
+    "year": 2019,
+    "rating": 8.1,
+    "category": "Fantastik",
+    "image": "https://m.media-amazon.com/images/M/MV5BOTY2Yzk2ZTUtNDIwOS00ZTkzLTkyMmEtMzEyY2U2OTRmNTJkXkEyXkFqcGc@._V1_.jpg",
+    "description": "Canavar avcısı Geralt’ın hikayesi."
+  },
+  {
+    "id":27,
+    "title": "House of the Dragon",
+    "year": 2022,
+    "rating": 8.5,
+    "category": "Fantastik",
+    "image": "https://m.media-amazon.com/images/M/MV5BM2QzMGVkNjUtN2Y4Yi00ODMwLTg3YzktYzUxYjJlNjFjNDY1XkEyXkFqcGc@._V1_.jpg",
+    "description": "Targaryen hanedanının yükselişi."
+  },
+  {
+    "id": 28,
+    "title": "Dark",
+    "year": 2017,
+    "rating": 8.8,
+    "category": "Bilim Kurgu",
+    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvpXX2wquOR8jggdR-wfzB9Rm5DLs-kh9IxA&s",
+    "description": "Zaman yolculuğu ve karanlık sırlar."
+  },
+  {
+    "id": 29,
+    "title": "Peaky Blinders",
+    "year": 2013,
+    "rating": 8.8,
+    "category": "Suç",
+    "image": "https://m.media-amazon.com/images/M/MV5BOGM0NGY3ZmItOGE2ZC00OWIxLTk0N2EtZWY4Yzg3ZDlhNGI3XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg",
+    "description": "İngiltere’de bir suç ailesinin yükselişi."
+  },
+  {
+    "id": 30,
+    "title": "The Boys",
+    "year": 2019,
+    "rating": 8.7,
+    "category": "Aksiyon",
+    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSae05Qpn3x7EHB6_de96S3zi0_zT9FySPUQg&s",
+    "description": "Süper kahramanların karanlık yüzü."
   }
 ]
