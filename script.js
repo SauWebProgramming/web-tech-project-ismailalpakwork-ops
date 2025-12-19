@@ -1,6 +1,6 @@
 let allMovies = [];
 
-// 1. Veriyi çekme (Fetch API & Async/Await)
+// 1. Veriyi Çekme (Fetch API & Async/Await)
 const getMovies = async () => {
     try {
         const response = await fetch('data.json'); 
@@ -11,9 +11,11 @@ const getMovies = async () => {
     }
 };
 
-// 2. Filmleri listeleme
+// 2. Filmleri Listeleme (Ana Sayfa Yapısı)
 const renderMovies = (movies) => {
     const list = document.getElementById('movieList');
+    if(!list) return; // Eğer favorilerden dönerken liste yoksa hata vermemesi için
+    
     list.innerHTML = ""; 
 
     movies.forEach(movie => {
@@ -24,7 +26,7 @@ const renderMovies = (movies) => {
             <div class="card-info">
                 <h3>${movie.title}</h3>
                 <p>${movie.year} | ⭐ ${movie.rating}</p>
-                <button onclick="showDetails(${movie.id})">Detayları Gör</button>
+                <button onclick="showDetails(${movie.id})">Detaylar</button>
                 <button onclick="addToFavorites(${movie.id})" style="background:#e74c3c; color:white; border:none; margin-top:5px; padding:5px; cursor:pointer;">❤️ Favori</button>
             </div>
         `;
@@ -32,12 +34,12 @@ const renderMovies = (movies) => {
     });
 };
 
-// 3. Detay Sayfası (SPA Mantığı - GÜNCELLENDİ)
+// 3. Detay Sayfası (SPA Mantığı - Sayfa Yenilemeden)
 const showDetails = (id) => {
     const movie = allMovies.find(m => m.id === id);
     const mainContent = document.getElementById('main-content');
     
-    // URL'yi güncelleme
+    // URL'yi güncelleme (Ödev gereksinimi)
     window.location.hash = `movie-${id}`;
 
     mainContent.innerHTML = `
@@ -58,7 +60,7 @@ const showDetails = (id) => {
     `;
 };
 
-// 4. LocalStorage ile Favori Yönetimi 
+// 4. LocalStorage ile Favori Yönetimi
 const addToFavorites = (id) => {
     let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
     const movie = allMovies.find(m => m.id === id);
@@ -72,33 +74,53 @@ const addToFavorites = (id) => {
     }
 };
 
+// 5. Favorilerden Film Çıkarma Özelliği
+const removeFromFavorites = (id) => {
+    let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+    favorites = favorites.filter(f => f.id !== id);
+    localStorage.setItem('favorites', JSON.stringify(favorites));
+    showFavorites(); // Listeyi anında güncelle
+};
+
+// 6. Favorileri Gösterme (SPA)
 const showFavorites = () => {
     const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
     const mainContent = document.getElementById('main-content');
     
     mainContent.innerHTML = `
         <div style="padding:20px;">
-            <button onclick="window.location.hash=''; renderMovies(allMovies)" style="cursor:pointer;">← Geri Dön</button>
+            <button onclick="window.location.hash=''; location.reload()" style="cursor:pointer;">← Geri Dön</button>
             <h2 style="margin-top:20px;">Favorilerim</h2>
-            <div id="movieList" class="grid-container"></div>
+            <div id="favoriteList" class="grid-container"></div>
         </div>
     `;
     
+    const favList = document.getElementById('favoriteList');
     if (favorites.length === 0) {
-        document.getElementById('movieList').innerHTML = "<p>Henüz favori eklemediniz.</p>";
+        favList.innerHTML = "<p>Henüz favori eklemediniz.</p>";
     } else {
-        renderMovies(favorites);
+        favorites.forEach(movie => {
+            const card = document.createElement('div');
+            card.className = 'card';
+            card.innerHTML = `
+                <img src="${movie.image}" alt="${movie.title}">
+                <div class="card-info">
+                    <h3>${movie.title}</h3>
+                    <button onclick="removeFromFavorites(${movie.id})" style="background:#c0392b; color:white; border:none; padding:5px; cursor:pointer; width:100%;">🗑️ Sil</button>
+                </div>
+            `;
+            favList.appendChild(card);
+        });
     }
 };
 
-// 5. Arama Çubuğu 
+// 7. Arama ve Sıralama Fonksiyonları
 document.getElementById('searchInput').addEventListener('input', (e) => {
     const term = e.target.value.toLowerCase();
     const filtered = allMovies.filter(m => m.title.toLowerCase().includes(term));
     renderMovies(filtered);
 });
 
-// 6. Sıralama Fonksiyonları
 function sortByRating() {
     const sorted = [...allMovies].sort((a, b) => b.rating - a.rating);
     renderMovies(sorted);
@@ -112,4 +134,5 @@ function sortByYear() {
 // Favoriler butonuna tıklama olayı
 document.getElementById('favBtn').onclick = showFavorites;
 
+// Başlangıçta verileri çek
 getMovies();
