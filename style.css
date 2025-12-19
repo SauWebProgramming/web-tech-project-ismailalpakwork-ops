@@ -1,46 +1,94 @@
 :root {
-    --bg-color: #0a0c10; /* Derin uzay siyahı */
-    --accent-color: #00d2ff; /* Neon mavi (Kırmızı yerine) */
-    --card-bg: rgba(255, 255, 255, 0.05); /* Cam efekti için şeffaf beyaz */
-    --text-main: #ffffff;
-    --text-dim: #a0a0a0;
+    --netflix-red: #e50914;
+    --bg-black: #0b0b0b;
+    --card-bg: #181818;
+    --neon-blue: #00d2ff;
 }
 
 body {
-    background: radial-gradient(circle at top, #1a1f25 0%, var(--bg-color) 100%);
-    color: var(--text-main);
-    font-family: 'Inter', sans-serif; /* Daha modern bir font */
+    background: radial-gradient(circle at top, #1c1c1c 0%, var(--bg-black) 100%);
+    color: white;
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    margin: 0;
+    overflow-x: hidden;
 }
 
-/* Cam Efektli Kartlar */
+/* Navigasyon Çubuğu - Şeffaf ve Cam Efekti */
+nav {
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(15px);
+    padding: 10px 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Film Kartları - Premium Dokunuş */
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 30px;
+    padding: 40px 5%;
+}
+
 .card {
+    position: relative;
     background: var(--card-bg);
-    backdrop-filter: blur(10px); /* Arkayı bulanıklaştırır */
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 16px; /* Daha oval ve modern köşeler */
+    border-radius: 8px;
     overflow: hidden;
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+    cursor: pointer;
 }
 
+/* Netflix Hover Efekti */
 .card:hover {
-    transform: translateY(-10px); /* Yukarı sıçrama efekti */
-    border-color: var(--accent-color);
-    box-shadow: 0 15px 30px rgba(0, 210, 255, 0.2);
+    transform: scale(1.1) translateY(-10px);
+    z-index: 50;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.8);
+    border: 1px solid var(--neon-blue);
 }
 
-/* Neon Butonlar */
+.card img {
+    width: 100%;
+    height: 320px;
+    object-fit: cover;
+    transition: opacity 0.3s;
+}
+
+.card-info {
+    padding: 15px;
+    background: linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0.6) 100%);
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    box-sizing: border-box;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.card:hover .card-info {
+    opacity: 1;
+}
+
+/* Buton Tasarımları */
 button {
-    background: linear-gradient(45deg, var(--accent-color), #3a7bd5);
+    background: var(--netflix-red);
     color: white;
     border: none;
-    padding: 10px 20px;
-    border-radius: 8px;
-    font-weight: 600;
-    box-shadow: 0 4px 15px rgba(0, 210, 255, 0.3);
+    padding: 8px 16px;
+    border-radius: 4px;
+    font-weight: bold;
     cursor: pointer;
+    text-transform: uppercase;
+    transition: 0.3s;
 }
 
 button:hover {
     filter: brightness(1.2);
-    box-shadow: 0 6px 20px rgba(0, 210, 255, 0.5);
+    transform: translateY(-2px);
 }

@@ -1,47 +1,56 @@
 [
   {
     "id": 1,
+    "title": "Inception",
+    "year": 2010,
+    "rating": 8.8,
+    "category": "Bilim Kurgu",
+    "image": "https://image.tmdb.org/t/p/w500/edv5bs1pXdfS2S17UTMbjLpUXrA.jpg",
+    "description": "Zihin hırsızlığı yapan bir casusun imkansız bir başlangıç görevi."
+  },
+  {
+    "id": 2,
+    "title": "The Dark Knight",
+    "year": 2008,
+    "rating": 9.0,
+    "category": "Aksiyon",
+    "image": "https://image.tmdb.org/t/p/w500/qJ2tW6WMUDp9QmSqvms9pU9OR9L.jpg",
+    "description": "Gotham'ın koruyucusu Joker'in kaosuna karşı adalet arıyor."
+  },
+  {
+    "id": 3,
     "title": "Interstellar",
     "year": 2014,
     "rating": 8.7,
     "category": "Bilim Kurgu",
     "image": "https://image.tmdb.org/t/p/w500/gEU2vRrbCn3pZz6IBt2qC4CiaO8.jpg",
-    "description": "İnsanlığın geleceği tehlikedeyken astronotlar yeni bir gezegen arar."
+    "description": "İnsanlığın yeni bir ev arayışında solucan deliği yolculuğu."
   },
   {
-    "id": 2,
-    "title": "Spider-Man: Across the Spider-Verse",
+    "id": 4,
+    "title": "Spider-Verse",
     "year": 2023,
     "rating": 8.9,
     "category": "Animasyon",
     "image": "https://image.tmdb.org/t/p/w500/8Vtpi9pR71SjC4I6SbiaqCBETm2.jpg",
-    "description": "Miles Morales çoklu evrende diğer Örümcek-İnsanlarla tanışır."
+    "description": "Miles Morales'in çoklu evrende yeni bir macera dolu yolculuğu."
   },
   {
-    "id": 3,
-    "title": "The Last of Us",
-    "year": 2023,
-    "rating": 8.8,
-    "category": "Dizi / Dram",
-    "image": "https://image.tmdb.org/t/p/w500/uKvH5jS1L4B9vQYpQIY1vSvOX6v.jpg",
-    "description": "Modern bir salgının mahvettiği bir dünyada Joel ve Ellie'nin hayatta kalma savaşı."
-  },
-  {
-    "id": 4,
+    "id": 5,
     "title": "Oppenheimer",
     "year": 2023,
     "rating": 8.4,
     "category": "Biyografi",
     "image": "https://image.tmdb.org/t/p/w500/8GxvA9zDZUGwhQpS3y8vM7McYdz.jpg",
-    "description": "Atom bombasının babası J. Robert Oppenheimer'ın hikayesi."
+    "description": "Atom bombasının babası J. Robert Oppenheimer'ın hayatı."
   },
   {
-    "id": 5,
-    "title": "Blade Runner 2049",
-    "year": 2017,
-    "rating": 8.0,
-    "category": "Bilim Kurgu / Cyberpunk",
-    "image": "https://image.tmdb.org/t/p/w500/g9979wsEbS2eYvOARvC98pYySyr.jpg",
-    "description": "Yeni bir Blade Runner, toplumdan geriye kalanı kaosa sürükleme potansiyeli olan bir sırrı keşfeder."
+    "id": 6,
+    "title": "The Last of Us",
+    "year": 2023,
+    "rating": 8.8,
+    "category": "Dizi",
+    "image": "https://image.tmdb.org/t/p/w500/uKvH5jS1L4B9vQYpQIY1vSvOX6v.jpg",
+    "description": "Modern bir salgının ortasında hayatta kalma mücadelesi."
   }
 ]
