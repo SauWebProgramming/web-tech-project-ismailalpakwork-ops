@@ -3,43 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SineSistem | Premium</title>
+    <title>LynxMovie | Premium</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <nav>
-        <div class="logo" onclick="location.reload()">SineSistem</div>
+        <div class="logo" onclick="location.reload()">LynxMovie</div>
         <div class="search-bar">
             <input type="text" id="searchInput" placeholder="Film veya dizi ara...">
         </div>
         <div class="nav-btns">
-            <button id="favBtn">❤️ Favorilerim</button>
+            <button id="favBtn" onclick="showFavorites()">❤️ Favorilerim</button>
         </div>
     </nav>
 
     <div id="hero" class="hero-section">
         <div class="hero-content">
-            <h1 id="hero-title">Hoş Geldiniz</h1>
-            <p id="hero-desc">Keşfetmeye başlamak için bir içerik seçin.</p>
+            <h1 id="hero-title">Yükleniyor...</h1>
+            <p id="hero-desc">Lütfen bekleyin...</p>
             <div class="hero-btns">
                 <button class="play-btn">▶ Oynat</button>
-                <button class="info-btn">ℹ Detaylar</button>
+                <button class="info-btn" id="heroInfoBtn">ℹ Detaylar</button>
             </div>
         </div>
     </div>
 
-   <div class="category-filters">
-    <button class="filter-btn active" onclick="filterByCategory('Tümü')">Tümü</button>
-    <button class="filter-btn" onclick="filterByCategory('Bilim Kurgu')">Bilim Kurgu</button>
-    <button class="filter-btn" onclick="filterByCategory('Suç')">Suç</button>
-    <button class="filter-btn" onclick="filterByCategory('Fantastik')">Fantastik</button>
-    <button class="filter-btn" onclick="filterByCategory('Aksiyon')">Aksiyon</button>
-    <button class="filter-btn" onclick="filterByCategory('Dram')">Dram</button>
-</div>
+    <div class="category-filters">
+        <button class="filter-btn active" onclick="filterByCategory('Tümü')">Tümü</button>
+        <button class="filter-btn" onclick="filterByCategory('Bilim Kurgu')">Bilim Kurgu</button>
+        <button class="filter-btn" onclick="filterByCategory('Suç')">Suç</button>
+        <button class="filter-btn" onclick="filterByCategory('Fantastik')">Fantastik</button>
+        <button class="filter-btn" onclick="filterByCategory('Aksiyon')">Aksiyon</button>
+        <button class="filter-btn" onclick="sortByRating()" style="background: gold; color: black; font-weight: bold;">⭐ En İyiler</button>
+    </div>
 
     <main id="main-content">
         <section id="movieList" class="grid-container"></section>
     </main>
+
+    <div id="detailsModal" class="modal-overlay"></div>
 
     <script src="script.js"></script>
 </body>

@@ -1,12 +1,60 @@
-:root { --red: #e50914; --dark: #0f1014; --card: #1a1c22; }
-body { background: var(--dark); color: white; font-family: sans-serif; margin: 0; overflow-x: hidden; }
+:root { 
+    --accent: #3bb80d; /* Kick Yeşili */
+    --dark: #0f1014; 
+    --card: #1a1c22; 
+    --gray: #333;
+}
 
-nav { display: flex; justify-content: space-between; align-items: center; padding: 10px 4%; background: rgba(0,0,0,0.9); position: sticky; top: 0; z-index: 1000; }
-input { padding: 10px; width: 400px; border-radius: 4px; border: none; background: #333; color: white; }
+body { 
+    background: var(--dark); 
+    color: white; 
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+    margin: 0; 
+    overflow-x: hidden; 
+}
 
-/* Hero Alanı Sabitlendi */
+/* Navigasyon Çubuğu */
+nav { 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    padding: 10px 4%; 
+    background: rgba(0,0,0,0.9); 
+    position: sticky; 
+    top: 0; 
+    z-index: 1000; 
+}
+
+.logo { 
+    font-size: 1.5rem; 
+    font-weight: bold; 
+    color: var(--accent); /* Logo Kick Yeşili */
+    cursor: pointer; 
+}
+
+input { 
+    padding: 10px; 
+    width: 400px; 
+    border-radius: 4px; 
+    border: none; 
+    background: var(--gray); 
+    color: white; 
+    outline: none;
+}
+
+#favBtn {
+    background: var(--accent); /* Buton Kick Yeşili */
+    color: black; /* Okunabilirlik için yazı siyah yapıldı */
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+/* Hero Alanı */
 .hero-section {
-    height: 500px; /* Boyutu sabitledik, taşma yapmaz */
+    height: 500px;
     background-size: cover !important;
     background-position: center !important;
     display: flex;
@@ -16,15 +64,115 @@ input { padding: 10px; width: 400px; border-radius: 4px; border: none; backgroun
     transition: background-image 0.5s ease;
 }
 
-.hero-content h1 { font-size: 3.5rem; margin: 0; color: var(--red); text-shadow: 2px 2px 10px black; }
+.hero-content h1 { 
+    font-size: 3.5rem; 
+    margin: 0; 
+    color: var(--accent); /* Hero başlığı Kick Yeşili */
+    text-shadow: 2px 2px 10px black; 
+}
 .hero-content p { max-width: 500px; font-size: 1.2rem; text-shadow: 1px 1px 5px black; }
 
+/* Filtreler */
 .category-filters { padding: 20px 5%; display: flex; gap: 10px; flex-wrap: wrap; background: var(--dark); }
-.filter-btn { background: #333; color: white; border: none; padding: 10px 20px; cursor: pointer; border-radius: 20px; transition: 0.3s; }
-.filter-btn.active { background: var(--red); }
+.filter-btn { background: var(--gray); color: white; border: none; padding: 10px 20px; cursor: pointer; border-radius: 20px; transition: 0.3s; }
+.filter-btn.active { 
+    background: var(--accent); 
+    color: black; /* Aktif filtre yazısı siyah */
+}
 
-.grid-container { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 25px; padding: 20px 5%; }
-.card { background: var(--card); border-radius: 10px; overflow: hidden; transition: 0.3s; border: 1px solid transparent; }
-.card:hover { transform: scale(1.05); border-color: white; }
-.card img { width: 100%; height: 300px; object-fit: cover; }
-.card-info { padding: 15px; text-align: center; }
+/* Film Kartları Grid Sistemi */
+.grid-container { 
+    display: grid; 
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); 
+    gap: 25px; 
+    padding: 20px 5%; 
+}
+
+.card {
+    background: var(--card);
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s;
+    cursor: pointer;
+    border: 1px solid #333;
+    position: relative;
+}
+
+.card:hover {
+    transform: scale(1.08);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+    border-color: var(--accent); /* Hover çerçevesi Kick Yeşili */
+    z-index: 10;
+}
+
+.card img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+}
+
+.card-info {
+    padding: 15px;
+    text-align: center;
+}
+
+/* Kart İçi Buton Düzeni */
+.card-btns {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.card-btns button {
+    padding: 5px 10px;
+    border-radius: 4px;
+    border: 1px solid #444;
+    background: #222;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+/* Favori Butonu Stili */
+.fav-btn {
+    font-size: 1.2rem;
+    background: transparent !important;
+}
+
+.fav-btn.active {
+    color: var(--accent) !important; /* Kalp ikonu Kick Yeşili */
+    border-color: var(--accent) !important;
+}
+
+/* Detay Modalı */
+.modal-overlay {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.9); z-index: 2000;
+    display: none; justify-content: center; align-items: center;
+}
+
+.modal-content {
+    background: #181818; width: 60%; max-height: 90vh;
+    border-radius: 10px; overflow-y: auto; position: relative;
+    border: 1px solid #333;
+}
+
+.modal-header { height: 300px; background-size: cover; background-position: center; }
+.modal-body { padding: 30px; }
+.close-btn { position: absolute; right: 20px; top: 10px; font-size: 35px; cursor: pointer; color: white; }
+
+.play-btn { 
+    background: var(--accent); 
+    color: black; 
+    border: none; 
+    padding: 10px 25px; 
+    border-radius: 4px; 
+    font-weight: bold; 
+    cursor: pointer; 
+}
+
+textarea:focus {
+    border-color: var(--accent);
+    outline: none;
+}

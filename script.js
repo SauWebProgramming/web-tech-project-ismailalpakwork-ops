@@ -1,69 +1,91 @@
 let allMovies = [];
+let favorites = JSON.parse(localStorage.getItem('sineFavs')) || [];
 
-// 1. Verileri data.json'dan Çek
 const getMovies = async () => {
     try {
         const response = await fetch('data.json');
-        if (!response.ok) throw new Error("Dosya okunamadı");
         allMovies = await response.json();
-        
         if(allMovies.length > 0) {
             renderMovies(allMovies);
-            updateHero(allMovies[0]); // Sayfa açılınca ilk filmi afişe koy
+            updateHero(allMovies[0]);
         }
-    } catch (error) {
-        console.error("Hata:", error);
-    }
+    } catch (e) { console.error("Hata:", e); }
 };
 
-// 2. Filmleri Listele (Grid Yapısı)
 const renderMovies = (movies) => {
     const list = document.getElementById('movieList');
-    if(!list) return;
-    list.innerHTML = ""; 
-    
-    movies.forEach(movie => {
-        const card = document.createElement('div');
-        card.className = 'card';
-        card.innerHTML = `
-            <img src="${movie.image}" alt="${movie.title}" onerror="this.src='https://via.placeholder.com/300x450?text=SineSistem'">
+    list.innerHTML = movies.map(m => `
+        <div class="card">
+            <img src="${m.image}" alt="${m.title}" onerror="this.src='https://via.placeholder.com/300x450?text=LynxMovie'">
             <div class="card-info">
-                <h3>${movie.title}</h3>
-                <button onclick="updateHeroById(${movie.id})">İncele</button>
+                <h3>${m.title}</h3>
+                <div class="card-btns">
+                    <button onclick="openDetails(${m.id})">ℹ Detaylar</button>
+                    <button class="fav-btn ${favorites.includes(m.id) ? 'active' : ''}" onclick="toggleFavorite(${m.id})">
+                        ${favorites.includes(m.id) ? '❤️' : '🤍'}
+                    </button>
+                </div>
             </div>
-        `;
-        list.appendChild(card);
-    });
+        </div>
+    `).join('');
 };
 
-// 3. Afişi (Hero) Güncelle
+const openDetails = (id) => {
+    const m = allMovies.find(item => item.id === id);
+    const modal = document.getElementById('detailsModal');
+    modal.innerHTML = `
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+            <div class="modal-header" style="background-image: url('${m.image}')"></div>
+            <div class="modal-body">
+                <h2>${m.title} (${m.year})</h2>
+                <p>⭐ IMDb: ${m.rating} | 📂 ${m.category}</p>
+                <p>${m.description}</p>
+                <button class="play-btn">▶ Hemen İzle</button>
+                <div class="comments">
+                    <h4>Yorumlar</h4>
+                    <textarea placeholder="Fikrinizi paylaşın..."></textarea>
+                    <button class="filter-btn" style="margin-top:5px" onclick="alert('Yorum gönderildi!')">Gönder</button>
+                </div>
+            </div>
+        </div>
+    `;
+    modal.style.display = 'flex';
+};
+
+const closeModal = () => { document.getElementById('detailsModal').style.display = 'none'; };
+
 const updateHero = (movie) => {
     const hero = document.getElementById('hero');
-    if (!hero) return;
     hero.style.backgroundImage = `linear-gradient(to right, rgba(0,0,0,0.9), transparent), url('${movie.image}')`;
     document.getElementById('hero-title').innerText = movie.title;
     document.getElementById('hero-desc').innerText = movie.description;
+    document.getElementById('heroInfoBtn').onclick = () => openDetails(movie.id);
 };
 
-// 4. ID'ye Göre Afişi Güncelle (İncele Butonu)
-const updateHeroById = (id) => {
-    const movie = allMovies.find(m => m.id === id);
-    if(movie) {
-        updateHero(movie);
-        window.scrollTo({ top: 0, behavior: 'smooth' }); // Sayfayı yukarı kaydır
-    }
+const toggleFavorite = (id) => {
+    const idx = favorites.indexOf(id);
+    if (idx === -1) favorites.push(id); else favorites.splice(idx, 1);
+    localStorage.setItem('sineFavs', JSON.stringify(favorites));
+    renderMovies(allMovies);
 };
 
-// 5. Kategori Filtreleme
+const showFavorites = () => {
+    const favs = allMovies.filter(m => favorites.includes(m.id));
+    renderMovies(favs.length > 0 ? favs : (alert("Favori listeniz boş!"), allMovies));
+};
+
 const filterByCategory = (cat) => {
-    const filtered = (cat === 'Tümü') ? allMovies : allMovies.filter(m => m.category === cat);
-    renderMovies(filtered);
-    
-    // Aktif buton rengini güncelle
-    document.querySelectorAll('.filter-btn').forEach(btn => {
-        btn.classList.toggle('active', btn.innerText === cat);
-    });
+    renderMovies(cat === 'Tümü' ? allMovies : allMovies.filter(m => m.category === cat));
 };
 
-// Başlat
+const sortByRating = () => {
+    renderMovies([...allMovies].sort((a,b) => b.rating - a.rating));
+};
+
+document.getElementById('searchInput').addEventListener('input', (e) => {
+    const term = e.target.value.toLowerCase();
+    renderMovies(allMovies.filter(m => m.title.toLowerCase().includes(term)));
+});
+
 getMovies();
