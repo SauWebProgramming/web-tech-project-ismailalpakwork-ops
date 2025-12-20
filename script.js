@@ -13,9 +13,13 @@ async function getMovies() {
   try {
     const res = await fetch("data.json");
     allMovies = await res.json();
+    
+    // Uygulama Başlatıcıları
     handleUIRender(getActiveList());
-    updateHero(allMovies[0]);
+    setRandomHero(); // Açılışta rastgele popüler film
     createDynamicCategories();
+    updateFavCounter(); // Sayaç başlat
+    checkThemeOnLoad(); // Tema kontrolü
   } catch (e) {
     console.error("Veri hatası:", e);
   }
@@ -26,12 +30,8 @@ function getActiveList() {
   const search = document.getElementById("searchInput").value.toLowerCase();
   let list = [...allMovies];
 
-  // 1. Kategori Filtresi
-  if (currentCategory !== "Tümü") {
-    list = list.filter(m => m.category === currentCategory);
-  }
+  if (currentCategory !== "Tümü") list = list.filter(m => m.category === currentCategory);
 
-  // 2. Yıl Filtresi
   if (currentYear !== "Tümü") {
     if (currentYear === "2020+") list = list.filter(m => m.year >= 2020);
     else if (currentYear === "2010-2019") list = list.filter(m => m.year >= 2010 && m.year <= 2019);
@@ -39,12 +39,8 @@ function getActiveList() {
     else if (currentYear === "90s") list = list.filter(m => m.year < 2000);
   }
 
-  // 3. Arama Filtresi
-  if (search) {
-    list = list.filter(m => m.title.toLowerCase().includes(search));
-  }
+  if (search) list = list.filter(m => m.title.toLowerCase().includes(search));
 
-  // 4. Sıralama Mantığı
   if (currentSort === "rating") list.sort((a, b) => b.rating - a.rating);
   else if (currentSort === "newest") list.sort((a, b) => b.year - a.year);
   else if (currentSort === "oldest") list.sort((a, b) => a.year - b.year);
@@ -58,7 +54,6 @@ function handleUIRender(list) {
   const container = document.getElementById("movieList");
   const search = document.getElementById("searchInput").value;
 
-  // Herhangi bir filtre aktifse GRID göster, değilse NETFLIX SATIRLARI
   if (search || currentCategory !== "Tümü" || currentYear !== "Tümü" || currentSort !== "default") {
     container.className = "grid-container";
     renderStandardGrid(list);
@@ -89,15 +84,12 @@ function resetFilter(type) {
   handleUIRender(getActiveList());
 }
 
-/* -------------------- ROZET (BADGE) SİSTEMİ -------------------- */
 function updateFilterBadges() {
   const container = document.getElementById("activeFilters");
   let badges = "";
-
   if (currentCategory !== "Tümü") badges += `<span class="filter-badge">📂 ${currentCategory} <span class="badge-close" onclick="resetFilter('cat')">×</span></span>`;
   if (currentYear !== "Tümü") badges += `<span class="filter-badge">📅 ${currentYear} <span class="badge-close" onclick="resetFilter('year')">×</span></span>`;
   if (currentSort !== "default") badges += `<span class="filter-badge">🔃 Sıralı <span class="badge-close" onclick="resetFilter('sort')">×</span></span>`;
-
   container.innerHTML = badges;
 }
 
@@ -159,6 +151,7 @@ function createMovieCardHTML(movie) {
 /* -------------------- DİNAMİK KATEGORİLER -------------------- */
 function createDynamicCategories() {
   const container = document.getElementById("dynamicCategories");
+  if(!container) return;
   const categories = ["Tümü", ...new Set(allMovies.map(m => m.category))];
   container.innerHTML = "";
   categories.forEach(cat => {
@@ -204,7 +197,13 @@ function toggleFavorite(id) {
     showToast("Favorilerden çıkarıldı.");
   }
   localStorage.setItem("lynxFavs", JSON.stringify(favorites));
+  updateFavCounter();
   handleUIRender(getActiveList());
+}
+
+function updateFavCounter() {
+  const counter = document.getElementById("favCount");
+  if(counter) counter.innerText = favorites.length;
 }
 
 function showToast(msg) {
@@ -216,13 +215,50 @@ function showToast(msg) {
   setTimeout(() => toast.remove(), 2500);
 }
 
+/* -------------------- HERO YÖNETİMİ -------------------- */
 function updateHero(movie) {
   const hero = document.getElementById("hero");
   if(!hero || !movie) return;
-  hero.style.backgroundImage = `linear-gradient(to right, rgba(0,0,0,0.9), transparent), url('${movie.image}')`;
+  hero.style.backgroundImage = `linear-gradient(to right, var(--dark), transparent), url('${movie.image}')`;
   document.getElementById("hero-title").innerText = movie.title;
   document.getElementById("hero-desc").innerText = movie.description;
   document.getElementById("heroInfoBtn").onclick = () => openDetails(movie.id);
+}
+
+function setRandomHero() {
+    if(allMovies.length === 0) return;
+    const popularMovies = allMovies.filter(m => m.rating >= 8.5);
+    const randomMovie = popularMovies[Math.floor(Math.random() * popularMovies.length)];
+    updateHero(randomMovie);
+}
+
+/* -------------------- TEMA YÖNETİMİ -------------------- */
+function checkThemeOnLoad() {
+    const themeToggle = document.getElementById("themeToggle");
+    const themeIcon = document.getElementById("themeIcon");
+    if (localStorage.getItem("theme") === "light") {
+        document.body.classList.add("light-mode");
+        if(themeIcon) themeIcon.innerText = "☀️";
+    }
+}
+
+const themeToggle = document.getElementById("themeToggle");
+if(themeToggle) {
+    themeToggle.onclick = () => {
+        document.body.classList.toggle("light-mode");
+        const isLight = document.body.classList.contains("light-mode");
+        const themeIcon = document.getElementById("themeIcon");
+        
+        if(themeIcon) themeIcon.innerText = isLight ? "☀️" : "🌙";
+        localStorage.setItem("theme", isLight ? "light" : "dark");
+        
+        // Tema değişince Hero gradyanını güncellemek için tekrar çağır
+        const currentHeroTitle = document.getElementById("hero-title").innerText;
+        const currentMovie = allMovies.find(m => m.title === currentHeroTitle);
+        if(currentMovie) updateHero(currentMovie);
+        
+        showToast(isLight ? "Aydınlık Mod Aktif ☀️" : "Karanlık Mod Aktif 🌙");
+    };
 }
 
 /* -------------------- SEARCH & SCROLL -------------------- */
@@ -236,8 +272,3 @@ window.addEventListener("scroll", () => {
 });
 
 getMovies();
-function setRandomHero() {
-    const popularMovies = allMovies.filter(m => m.rating >= 8.5);
-    const randomMovie = popularMovies[Math.floor(Math.random() * popularMovies.length)];
-    updateHero(randomMovie);
-}
