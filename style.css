@@ -1,18 +1,61 @@
+
 :root { 
-    --accent: #53fc18; /* Tam Kick Yeşili Tonu */
-    --dark: #0b0e11;   /* Daha derin sinematik siyah */
+    --accent: #53fc18;
+    --dark: #0b0e11;   
     --card: #191b1f; 
     --gray: #24272c;
-    --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    --text: #ffffff; /* Varsayılan metin: Beyaz */
+    --transition: all 0.4s ease;
 }
+
+/* Göz dostu Aydınlık Mod */
+body.light-mode {
+    --dark: #f0f0f2;   /* Saf beyaz yerine yumuşak buz grisi */
+    --card: #ffffff;   /* Kartlar bembeyaz kalsın ki arka plandan ayrılsın */
+    --gray: #d8d8df;   /* Çizgiler ve butonlar için yumuşak gri */
+    --text: #323338;   /* Metinler için göz dostu antrasit */
+}
+
+/* Ekstra Yumuşatma Dokunuşları */
+body.light-mode nav {
+    background: rgba(240, 240, 242, 0.85); /* Navbar arka planla uyumlu */
+}
+
+body.light-mode .hero-section {
+    /* Hero alanındaki geçişi daha yumuşak yapalım */
+    box-shadow: inset 0 -120px 100px var(--dark);
+    background-image: linear-gradient(to right, rgba(240, 240, 242, 0.9), transparent);
+}
+
 
 body { 
     background: var(--dark); 
-    color: white; 
-    font-family: 'Inter', 'Segoe UI', Roboto, sans-serif; 
+    color: var(--text); /* Tüm metinler bu değişkene bağlandı */
+    font-family: 'Inter', sans-serif; 
     margin: 0; 
-    overflow-x: hidden; 
+    transition: background 0.4s, color 0.4s;
 }
+
+/* Başlıkların görünmesi için kritik ekleme */
+h1, h2, h3, h4, p, span {
+    color: var(--text); /* Sabit beyaz yerine değişkene zorla */
+}
+
+/* Navbar ve Kartların Aydınlık Mod Düzenlemesi */
+body.light-mode nav { 
+    background: rgba(236, 236, 241, 0.8); 
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+
+body.light-mode .card {
+    background: var(--card);
+    border: 1px solid #ddd;
+}
+
+body.light-mode .card-info h3 {
+    color: var(--text) !important; /* Film adlarını görünür yap */
+} 
+
 
 /* --- 1. PREMIUM NAVBAR (Glassmorphism + Neon Glow) --- */
 nav { 
@@ -460,3 +503,34 @@ input:focus {
 }
 
 .badge-close { cursor: pointer; font-size: 16px; }
+
+.theme-btn {
+    background: var(--gray);
+    border: none;
+    padding: 8px;
+    border-radius: 50%;
+    cursor: pointer;
+    margin-left: 10px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Aydınlık modda okunabilirlik düzeltmeleri */
+body.light-mode {
+    --dark: #ececf1;   /* Saf beyaz yerine çok hafif grimsi-mavi */
+    --card: #f9f9fb;   /* Kartlar için yumuşak bir ton */
+    --gray: #d1d1d6;   /* Ayırıcılar için hafif gri */
+    --text: #2d2e33;   /* Saf siyah yerine koyu füme (okuması daha rahattır) */
+}
+
+/* Göz yormayan ek dokunuşlar */
+body.light-mode .hero-section {
+    box-shadow: inset 0 -120px 100px var(--dark);
+    /* Hero alanındaki sert siyah geçişi yumuşatır */
+    background-image: linear-gradient(to right, rgba(236, 236, 241, 0.95), transparent);
+}
+
+body.light-mode .card:hover {
+    box-shadow: 0 15px 30px rgba(0,0,0,0.1); /* Neon yerine hafif gölge */
+}
