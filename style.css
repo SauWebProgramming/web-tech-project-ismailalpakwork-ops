@@ -1,178 +1,462 @@
 :root { 
-    --accent: #3bb80d; /* Kick Yeşili */
-    --dark: #0f1014; 
-    --card: #1a1c22; 
-    --gray: #333;
+    --accent: #53fc18; /* Tam Kick Yeşili Tonu */
+    --dark: #0b0e11;   /* Daha derin sinematik siyah */
+    --card: #191b1f; 
+    --gray: #24272c;
+    --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
 body { 
     background: var(--dark); 
     color: white; 
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+    font-family: 'Inter', 'Segoe UI', Roboto, sans-serif; 
     margin: 0; 
     overflow-x: hidden; 
 }
 
-/* Navigasyon Çubuğu */
+/* --- 1. PREMIUM NAVBAR (Glassmorphism + Neon Glow) --- */
 nav { 
     display: flex; 
     justify-content: space-between; 
     align-items: center; 
-    padding: 10px 4%; 
-    background: rgba(0,0,0,0.9); 
+    padding: 15px 5%; 
+    background: rgba(11, 14, 17, 0.8); 
+    backdrop-filter: blur(15px); /* Arka planı bulanıklaştırır */
     position: sticky; 
     top: 0; 
     z-index: 1000; 
+    border-bottom: 1px solid rgba(83, 252, 24, 0.1);
+    transition: var(--transition);
 }
 
 .logo { 
-    font-size: 1.5rem; 
-    font-weight: bold; 
-    color: var(--accent); /* Logo Kick Yeşili */
+    font-size: 1.7rem; 
+    font-weight: 900; 
+    color: var(--accent); 
     cursor: pointer; 
+    letter-spacing: -1px;
+    text-shadow: 0 0 15px rgba(83, 252, 24, 0.3);
 }
 
 input { 
-    padding: 10px; 
+    padding: 12px 20px; 
     width: 400px; 
-    border-radius: 4px; 
-    border: none; 
-    background: var(--gray); 
+    border-radius: 8px; 
+    border: 1px solid var(--gray); 
+    background: rgba(25, 27, 31, 0.8); 
     color: white; 
     outline: none;
+    transition: var(--transition);
 }
 
-#favBtn {
-    background: var(--accent); /* Buton Kick Yeşili */
-    color: black; /* Okunabilirlik için yazı siyah yapıldı */
+input:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 15px rgba(83, 252, 24, 0.15);
+    width: 450px;
+}
+
+/* Buton Işıma Efekti */
+#favBtn, .play-btn {
+    position: relative;
+    overflow: hidden;
+    background: var(--accent);
+    color: black;
     border: none;
-    padding: 8px 15px;
-    border-radius: 5px;
+    padding: 10px 20px;
+    border-radius: 8px;
     cursor: pointer;
-    font-weight: bold;
+    font-weight: 800;
+    box-shadow: 0 4px 15px rgba(83, 252, 24, 0.2);
+    transition: var(--transition);
 }
 
-/* Hero Alanı */
+#favBtn::after, .play-btn::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -60%;
+    width: 20%;
+    height: 200%;
+    background: rgba(255, 255, 255, 0.4);
+    transform: rotate(30deg);
+    transition: 0.6s;
+}
+
+#favBtn:hover::after, .play-btn:hover::after {
+    left: 120%;
+}
+
+#favBtn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(83, 252, 24, 0.5);
+}
+
+/* --- 2. SİNEMATİK HERO ALANI --- */
 .hero-section {
-    height: 500px;
+    height: 65vh;
     background-size: cover !important;
-    background-position: center !important;
+    background-position: center 20% !important;
     display: flex;
     align-items: center;
     padding: 0 5%;
-    background-image: linear-gradient(to right, rgba(0,0,0,0.9), transparent);
-    transition: background-image 0.5s ease;
+    position: relative;
+    box-shadow: inset 0 -120px 100px var(--dark);
+    background-image: linear-gradient(to right, var(--dark), transparent);
 }
 
 .hero-content h1 { 
-    font-size: 3.5rem; 
+    font-size: 4.5rem; 
     margin: 0; 
-    color: var(--accent); /* Hero başlığı Kick Yeşili */
-    text-shadow: 2px 2px 10px black; 
+    color: var(--accent); 
+    font-weight: 900;
+    line-height: 1;
+    text-shadow: 0 0 30px rgba(83, 252, 24, 0.2);
 }
-.hero-content p { max-width: 500px; font-size: 1.2rem; text-shadow: 1px 1px 5px black; }
 
-/* Filtreler */
-.category-filters { padding: 20px 5%; display: flex; gap: 10px; flex-wrap: wrap; background: var(--dark); }
-.filter-btn { background: var(--gray); color: white; border: none; padding: 10px 20px; cursor: pointer; border-radius: 20px; transition: 0.3s; }
+.hero-content p { 
+    max-width: 600px; 
+    font-size: 1.3rem; 
+    color: #adadb8;
+    margin-top: 20px;
+}
+
+/* --- 3. MODERN FİLTRELER --- */
+.category-filters { padding: 30px 5%; display: flex; gap: 12px; flex-wrap: wrap; }
+.filter-btn { 
+    background: var(--gray); 
+    color: #efeff1; 
+    border: none; 
+    padding: 10px 24px; 
+    cursor: pointer; 
+    border-radius: 10px; 
+    font-weight: 600;
+    transition: var(--transition); 
+}
+
+.filter-btn:hover { background: #444; transform: translateY(-2px); }
 .filter-btn.active { 
     background: var(--accent); 
-    color: black; /* Aktif filtre yazısı siyah */
+    color: black; 
+    box-shadow: 0 5px 15px rgba(83, 252, 24, 0.3);
 }
 
-/* Film Kartları Grid Sistemi */
+/* --- 4. PREMIUM KART TASARIMI (Glow + Zoom) --- */
 .grid-container { 
     display: grid; 
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); 
-    gap: 25px; 
-    padding: 20px 5%; 
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); 
+    gap: 30px; 
+    padding: 20px 5% 100px; 
 }
 
 .card {
     background: var(--card);
-    border-radius: 8px;
+    border-radius: 15px;
     overflow: hidden;
-    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s;
-    cursor: pointer;
-    border: 1px solid #333;
+    transition: transform 0.5s cubic-bezier(0.2, 1, 0.3, 1), box-shadow 0.5s ease, border-color 0.3s ease;
+    border: 1px solid rgba(255,255,255,0.05);
     position: relative;
 }
 
 .card:hover {
-    transform: scale(1.08);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.5);
-    border-color: var(--accent); /* Hover çerçevesi Kick Yeşili */
+    transform: translateY(-12px) scale(1.05); /* Daha belirgin yükselme */
+    box-shadow: 0 20px 40px rgba(0,0,0,0.8), 0 0 25px rgba(83, 252, 24, 0.25); /* Neon Yeşil Glow */
+    border-color: var(--accent);
     z-index: 10;
 }
 
 .card img {
     width: 100%;
-    height: 300px;
+    height: 330px;
     object-fit: cover;
+    transition: transform 0.8s ease; /* Resim yakınlaşma hızı */
 }
 
-.card-info {
-    padding: 15px;
-    text-align: center;
+.card:hover img { 
+    transform: scale(1.15); /* Hoverda resim yavaşça zoom yapar */
 }
 
-/* Kart İçi Buton Düzeni */
-.card-btns {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin-top: 10px;
-}
+.card-info { padding: 20px; text-align: center; }
+.card-info h3 { font-size: 1.1rem; margin: 0; font-weight: 700; }
 
-.card-btns button {
-    padding: 5px 10px;
-    border-radius: 4px;
-    border: 1px solid #444;
-    background: #222;
-    color: white;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-/* Favori Butonu Stili */
-.fav-btn {
-    font-size: 1.2rem;
-    background: transparent !important;
-}
-
-.fav-btn.active {
-    color: var(--accent) !important; /* Kalp ikonu Kick Yeşili */
-    border-color: var(--accent) !important;
-}
-
-/* Detay Modalı */
+/* --- 5. DETAY MODALI (Sinematik Blur + Pop) --- */
 .modal-overlay {
     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0,0,0,0.9); z-index: 2000;
+    background: rgba(0,0,0,0.85); 
+    backdrop-filter: blur(12px); /* Arka planı bulanıklaştırır */
+    z-index: 2000;
     display: none; justify-content: center; align-items: center;
+    transition: opacity 0.4s ease;
 }
 
 .modal-content {
-    background: #181818; width: 60%; max-height: 90vh;
-    border-radius: 10px; overflow-y: auto; position: relative;
-    border: 1px solid #333;
+    background: #141619; 
+    width: 70%; 
+    max-width: 900px;
+    max-height: 85vh;
+    border-radius: 20px; 
+    overflow-y: auto; 
+    position: relative;
+    border: 1px solid rgba(83, 252, 24, 0.2);
+    animation: modalPop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-.modal-header { height: 300px; background-size: cover; background-position: center; }
-.modal-body { padding: 30px; }
-.close-btn { position: absolute; right: 20px; top: 10px; font-size: 35px; cursor: pointer; color: white; }
-
-.play-btn { 
-    background: var(--accent); 
-    color: black; 
-    border: none; 
-    padding: 10px 25px; 
-    border-radius: 4px; 
-    font-weight: bold; 
-    cursor: pointer; 
+@keyframes modalPop {
+    from { transform: translateY(30px) scale(0.9); opacity: 0; }
+    to { transform: translateY(0) scale(1); opacity: 1; }
 }
 
-textarea:focus {
-    border-color: var(--accent);
-    outline: none;
+.modal-header { height: 400px; background-size: cover; background-position: center; position: relative; }
+.modal-header::after {
+    content: '';
+    position: absolute; bottom: 0; width: 100%; height: 50%;
+    background: linear-gradient(to top, #141619, transparent);
 }
+
+.modal-body { padding: 40px; position: relative; margin-top: -60px; }
+.close-btn { position: absolute; right: 25px; top: 20px; font-size: 40px; cursor: pointer; color: white; z-index: 100; transition: 0.3s; }
+.close-btn:hover { color: var(--accent); transform: rotate(90deg); }
+
+/* Skeleton & Loader */
+.skeleton {
+    background: linear-gradient(90deg, #191b1f 25%, #24272c 50%, #191b1f 75%);
+    background-size: 200% 100%;
+    animation: skeleton-loading 1.5s infinite;
+    border-radius: 15px;
+}
+
+@keyframes skeleton-loading {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}
+
+.loader {
+    display: none;
+    justify-content: center;
+    padding: 20px;
+    width: 100%;
+}
+
+.loader span {
+    width: 12px;
+    height: 12px;
+    background: var(--accent);
+    border-radius: 50%;
+    margin: 0 5px;
+    animation: dots 0.6s infinite alternate;
+}
+
+@keyframes dots {
+    to { opacity: 0.3; transform: translateY(-10px); }
+}
+#scrollTop {
+    position: fixed; bottom: 30px; right: 30px;
+    width: 50px; height: 50px;
+    background: var(--accent); color: black;
+    border: none; border-radius: 50%;
+    font-size: 20px; font-weight: bold;
+    cursor: pointer; display: none; /* Scroll başlayınca görünecek */
+    box-shadow: 0 0 20px rgba(83, 252, 24, 0.4);
+    z-index: 1000; transition: 0.3s;
+}
+#scrollTop:hover { transform: scale(1.1); }
+
+button:focus,
+input:focus {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+}
+
+@media (max-width: 768px) {
+    nav {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    input {
+        width: 100%;
+    }
+
+    .hero-content h1 {
+        font-size: 2.5rem;
+    }
+
+    .hero-section {
+        height: 50vh;
+    }
+
+    .modal-content {
+        width: 95%;
+    }
+}
+/* Netflix Tarzı Satır Düzeni */
+.category-row {
+    margin-bottom: 40px;
+    padding: 0 5%;
+}
+
+.category-row h2 {
+    color: var(--accent);
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    font-weight: 800;
+}
+
+.row-container {
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+    padding: 10px 0 20px 0;
+    scroll-behavior: smooth;
+}
+
+/* Kaydırma Çubuğunu Özelleştir (Kick Yeşili) */
+.row-container::-webkit-scrollbar {
+    height: 4px;
+}
+.row-container::-webkit-scrollbar-thumb {
+    background: var(--accent);
+    border-radius: 10px;
+}
+.row-container::-webkit-scrollbar-track {
+    background: var(--gray);
+}
+
+/* Satır İçindeki Kart Boyutu */
+.row-container .card {
+    min-width: 220px;
+    flex-shrink: 0;
+}
+/* Satır Sistemi Stilleri */
+.category-row {
+    margin-bottom: 40px;
+    padding: 0 4%;
+}
+
+.row-title {
+    color: var(--accent);
+    margin-bottom: 15px;
+    font-size: 1.5rem;
+}
+
+.row-container {
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+    padding-bottom: 15px;
+    scroll-behavior: smooth;
+}
+
+/* Kartların yan yana gelmesi için */
+.row-container .card {
+    min-width: 220px;
+    flex: 0 0 auto;
+}
+
+/* Şık Kaydırma Çubuğu */
+.row-container::-webkit-scrollbar {
+    height: 6px;
+}
+.row-container::-webkit-scrollbar-thumb {
+    background: var(--accent);
+    border-radius: 10px;
+}
+.row-container::-webkit-scrollbar-track {
+    background: #191b1f;
+}
+
+/* Dropdown Konteynırı */
+.dropdown {
+    position: relative;
+    display: inline-block;
+    margin: 20px 5%;
+}
+
+.dropbtn {
+    background: var(--gray);
+    color: white;
+    padding: 12px 25px;
+    border: 1px solid rgba(83, 252, 24, 0.3);
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.dropbtn:hover {
+    background: var(--accent);
+    color: black;
+    box-shadow: 0 0 15px rgba(83, 252, 24, 0.4);
+}
+
+/* Açılır Menü İçeriği */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #191b1f;
+    min-width: 200px;
+    box-shadow: 0px 8px 16px rgba(0,0,0,0.5);
+    z-index: 1001;
+    border-radius: 8px;
+    border: 1px solid var(--gray);
+    margin-top: 5px;
+}
+
+.dropdown-content button {
+    color: white;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    width: 100%;
+    border: none;
+    background: none;
+    text-align: left;
+    cursor: pointer;
+}
+
+.dropdown-content button:hover {
+    background-color: var(--accent);
+    color: black;
+}
+
+.dropdown:hover .dropdown-content { display: block; }
+
+/* Aktif Filtre Rozetleri */
+.active-filters {
+    display: flex;
+    gap: 10px;
+    margin-left: 5%;
+    margin-bottom: 10px;
+}
+
+.filter-badge {
+    background: rgba(83, 252, 24, 0.1);
+    color: var(--accent);
+    padding: 5px 15px;
+    border-radius: 20px;
+    border: 1px solid var(--accent);
+    font-size: 0.9rem;
+}
+
+.filter-panel {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    align-items: center;
+    padding: 20px 5%;
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.filter-badge {
+    background: var(--accent);
+    color: black;
+    padding: 6px 15px;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 4px 15px rgba(83, 252, 24, 0.2);
+}
+
+.badge-close { cursor: pointer; font-size: 16px; }
