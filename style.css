@@ -4,57 +4,85 @@
     --dark: #0b0e11;   
     --card: #191b1f; 
     --gray: #24272c;
-    --text: #ffffff; /* Varsayılan metin: Beyaz */
-    --transition: all 0.4s ease;
+    --text: #ffffff;
+    --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
-/* Göz dostu Aydınlık Mod */
 body.light-mode {
-    --dark: #f0f0f2;   /* Saf beyaz yerine yumuşak buz grisi */
-    --card: #ffffff;   /* Kartlar bembeyaz kalsın ki arka plandan ayrılsın */
-    --gray: #d8d8df;   /* Çizgiler ve butonlar için yumuşak gri */
-    --text: #323338;   /* Metinler için göz dostu antrasit */
+    --dark: #f0f0f2;
+    --card: #ffffff;
+    --gray: #d8d8df;
+    --text: #323338;
 }
-
-/* Ekstra Yumuşatma Dokunuşları */
-body.light-mode nav {
-    background: rgba(240, 240, 242, 0.85); /* Navbar arka planla uyumlu */
-}
-
-body.light-mode .hero-section {
-    /* Hero alanındaki geçişi daha yumuşak yapalım */
-    box-shadow: inset 0 -120px 100px var(--dark);
-    background-image: linear-gradient(to right, rgba(240, 240, 242, 0.9), transparent);
-}
-
 
 body { 
     background: var(--dark); 
-    color: var(--text); /* Tüm metinler bu değişkene bağlandı */
+    color: var(--text); 
     font-family: 'Inter', sans-serif; 
     margin: 0; 
     transition: background 0.4s, color 0.4s;
+    overflow-x: hidden;
 }
 
-/* Başlıkların görünmesi için kritik ekleme */
-h1, h2, h3, h4, p, span {
-    color: var(--text); /* Sabit beyaz yerine değişkene zorla */
+h1, h2, h3, h4, p, span { color: var(--text); }
+
+/* --- NAVBAR --- */
+nav { 
+    display: flex; justify-content: space-between; align-items: center; 
+    padding: 15px 5%; background: rgba(11, 14, 17, 0.8); 
+    backdrop-filter: blur(15px); position: sticky; top: 0; z-index: 1000; 
+    border-bottom: 1px solid rgba(83, 252, 24, 0.1);
+}
+body.light-mode nav { background: rgba(240, 240, 242, 0.85); border-bottom: 1px solid #ddd; }
+
+/* --- HERO SECTION --- */
+.hero-section {
+    height: 75vh; background-size: cover !important; background-position: center 20% !important;
+    display: flex; align-items: center; padding: 0 5%; position: relative;
+    image-rendering: -webkit-optimize-contrast;
+    box-shadow: inset 0 -150px 120px var(--dark);
+    background-image: linear-gradient(to right, var(--dark) 25%, transparent 100%);
+}
+body.light-mode .hero-section { background-image: linear-gradient(to right, rgba(240, 240, 242, 0.9), transparent); }
+
+/* --- SINEMATIK MODAL (Backdrop Effect) --- */
+.modal-overlay {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.85); backdrop-filter: blur(12px);
+    z-index: 2000; display: none; justify-content: center; align-items: center;
 }
 
-/* Navbar ve Kartların Aydınlık Mod Düzenlemesi */
-body.light-mode nav { 
-    background: rgba(236, 236, 241, 0.8); 
-    border-bottom: 1px solid rgba(0,0,0,0.1);
+.modal-content {
+    background: var(--card); width: 75%; max-width: 950px;
+    max-height: 90vh; border-radius: 24px; overflow: hidden;
+    position: relative; border: 1px solid rgba(83, 252, 24, 0.2);
+    animation: modalPop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-body.light-mode .card {
-    background: var(--card);
-    border: 1px solid #ddd;
+.modal-header {
+    height: 450px; background-size: cover !important; background-position: center !important;
+    position: relative; image-rendering: -webkit-optimize-contrast;
 }
 
-body.light-mode .card-info h3 {
-    color: var(--text) !important; /* Film adlarını görünür yap */
-} 
+.modal-header::after {
+    content: ''; position: absolute; bottom: 0; width: 100%; height: 70%;
+    background: linear-gradient(to top, var(--card), transparent);
+}
+
+.modal-body { padding: 0 40px 40px; position: relative; margin-top: -80px; z-index: 5; }
+
+/* --- KARTLAR VE GRID --- */
+.grid-container { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 30px; padding: 40px 5%; }
+.card {
+    background: var(--card); border-radius: 15px; overflow: hidden;
+    transition: var(--transition); border: 1px solid rgba(255,255,255,0.05);
+}
+.card:hover { transform: translateY(-10px) scale(1.03); border-color: var(--accent); box-shadow: 0 20px 40px rgba(0,0,0,0.4); }
+.card img { width: 100%; height: 330px; object-fit: cover; image-rendering: -webkit-optimize-contrast; }
+
+/* --- DIGER ELEMENTLER --- */
+.badge-counter { background: #fff; color: #000; font-size: 11px; padding: 2px 6px; border-radius: 50%; margin-left: 5px; font-weight: bold; }
+.theme-btn { background: var(--gray); border: none; padding: 10px; border-radius: 50%; cursor: pointer; }
 
 
 /* --- 1. PREMIUM NAVBAR (Glassmorphism + Neon Glow) --- */
@@ -136,15 +164,29 @@ input:focus {
 
 /* --- 2. SİNEMATİK HERO ALANI --- */
 .hero-section {
-    height: 65vh;
+    height: 75vh; /* Biraz daha genişletelim, daha görkemli dursun */
     background-size: cover !important;
     background-position: center 20% !important;
     display: flex;
     align-items: center;
     padding: 0 5%;
     position: relative;
-    box-shadow: inset 0 -120px 100px var(--dark);
-    background-image: linear-gradient(to right, var(--dark), transparent);
+    /* Resmin netliğini artırmak için */
+    image-rendering: -webkit-optimize-contrast;
+    
+    /* Çift katmanlı gölge: Hem alttan hem soldan metni okunaklı yapar */
+    box-shadow: inset 0 -150px 120px var(--dark);
+    background-image: linear-gradient(to right, var(--dark) 25%, transparent 100%);
+}
+
+/* Afişin üstüne sinematik bir film katmanı (grain/vignette) ekleyelim */
+.hero-section::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: radial-gradient(circle, transparent 20%, rgba(0,0,0,0.4) 100%);
+    pointer-events: none;
+    z-index: 1;
 }
 
 .hero-content h1 { 
@@ -213,6 +255,11 @@ input:focus {
     object-fit: cover;
     transition: transform 0.8s ease; /* Resim yakınlaşma hızı */
 }
+img {
+    image-rendering: -webkit-optimize-contrast; /* Kontrastı ve netliği optimize eder */
+    image-rendering: crisp-edges;
+    object-fit: cover; /* Resmi kutuya sığdırırken en-boy oranını korur */
+} 
 
 .card:hover img { 
     transform: scale(1.15); /* Hoverda resim yavaşça zoom yapar */
@@ -248,12 +295,32 @@ input:focus {
     to { transform: translateY(0) scale(1); opacity: 1; }
 }
 
-.modal-header { height: 400px; background-size: cover; background-position: center; position: relative; }
+
+.modal-header {
+    height: 450px; /* Biraz daha derinlik katalım */
+    background-size: cover !important;
+    background-position: center 20% !important;
+    position: relative;
+    border-radius: 20px 20px 0 0;
+    image-rendering: -webkit-optimize-contrast;
+}
+
+/* Afişin üzerine şık bir karartma ve metin okuma katmanı */
 .modal-header::after {
     content: '';
-    position: absolute; bottom: 0; width: 100%; height: 50%;
-    background: linear-gradient(to top, #141619, transparent);
+    position: absolute;
+    bottom: 0; left: 0; width: 100%; height: 70%;
+    /* Alttan yukarıya doğru yumuşak bir karartma (gradient) */
+    background: linear-gradient(to top, var(--card), transparent);
 }
+
+.modal-body {
+    padding: 30px 40px 40px;
+    position: relative;
+    margin-top: -80px; /* İçeriği afişin üzerine biraz kaydıralım (Sinematik efekt) */
+    z-index: 2;
+}
+
 
 .modal-body { padding: 40px; position: relative; margin-top: -60px; }
 .close-btn { position: absolute; right: 25px; top: 20px; font-size: 40px; cursor: pointer; color: white; z-index: 100; transition: 0.3s; }

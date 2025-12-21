@@ -167,19 +167,26 @@ function createDynamicCategories() {
 }
 
 /* -------------------- MODAL & FAVORİ -------------------- */
+// ... (Diğer fonksiyonlar aynı kalacak, sadece openDetails güncellendi)
+
 function openDetails(id) {
   const movie = allMovies.find(m => m.id === id);
   const modal = document.getElementById("detailsModal");
   modal.style.display = "flex";
+  
   modal.innerHTML = `
     <div class="modal-content">
-      <span class="close-btn" onclick="closeModal()">&times;</span>
-      <div class="modal-header" style="background-image:url('${movie.image}')"></div>
+      <span class="close-btn" onclick="closeModal()" style="position:absolute; right:25px; top:15px; z-index:10; font-size:35px; cursor:pointer; color:#fff;">&times;</span>
+      <div class="modal-header" style="background: url('${movie.image}')"></div>
       <div class="modal-body">
-        <h2>${movie.title} (${movie.year})</h2>
-        <p><strong>Kategori:</strong> ${movie.category} | <strong>IMDb:</strong> ${movie.rating}</p>
-        <p>${movie.description}</p>
-        <button class="play-btn" onclick="showToast('Oynatılıyor...')">▶ Hemen İzle</button>
+        <h2 style="font-size: 2.8rem; margin: 0 0 10px 0; font-weight: 900;">${movie.title} (${movie.year})</h2>
+        <div style="display: flex; gap: 15px; margin-bottom: 20px; color: var(--accent); font-weight: bold; font-size: 1.1rem;">
+            <span>⭐ ${movie.rating} IMDb</span>
+            <span>📂 ${movie.category}</span>
+            <span>📅 ${movie.year}</span>
+        </div>
+        <p style="font-size: 1.15rem; line-height: 1.7; opacity: 0.9; margin-bottom: 30px; max-width: 800px;">${movie.description}</p>
+        <button class="play-btn" style="padding: 15px 40px; font-size: 1.1rem;">▶ Hemen İzle</button>
       </div>
     </div>
   `;

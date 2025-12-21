@@ -5,16 +5,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LynxMovie | Premium</title>
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
 </head>
 <body>
 
 <header>
     <nav>
         <div class="logo" id="logo" onclick="location.reload()">LynxMovie</div>
+        
         <div class="search-bar">
             <input type="text" id="searchInput" placeholder="Film veya dizi ara...">
         </div>
-        <button id="favBtn">❤️ Favorilerim</button>
+
+        <div class="nav-btns">
+            <button id="favBtn" class="premium-btn">
+                ❤️ Listem <span id="favCount" class="badge-counter">0</span>
+            </button>
+            
+            <button id="themeToggle" class="theme-btn" aria-label="Tema Değiştir">
+                <span id="themeIcon">🌙</span>
+            </button>
+        </div>
     </nav>
 </header>
 
@@ -23,7 +34,7 @@
         <h1 id="hero-title">Yükleniyor...</h1>
         <p id="hero-desc">Lütfen bekleyin...</p>
         <div class="hero-btns">
-            <button class="play-btn">▶ Oynat</button>
+            <button class="play-btn" onclick="showToast('Oynatılıyor...')">▶ Oynat</button>
             <button class="filter-btn" id="heroInfoBtn">ℹ Detaylar</button>
         </div>
     </div>
@@ -60,10 +71,11 @@
 </section>
 
 <main>
-    <section id="movieList" class="grid-container"></section>
+    <section id="movieList"></section>
 </main>
 
 <div id="detailsModal" class="modal-overlay"></div>
+
 <button id="scrollTop">↑</button>
 
 <script src="script.js"></script>
