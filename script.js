@@ -6,7 +6,6 @@ let currentCategory = "Tümü";
 let currentYear = "Tümü";
 let currentSort = "default";
 let displayedCount = 12;
-const loadStep = 6;
 
 /* -------------------- VERİ ÇEKME -------------------- */
 async function getMovies() {
@@ -14,12 +13,11 @@ async function getMovies() {
     const res = await fetch("data.json");
     allMovies = await res.json();
     
-    // Uygulama Başlatıcıları
     handleUIRender(getActiveList());
-    setRandomHero(); // Açılışta rastgele popüler film
+    setRandomHero(); 
     createDynamicCategories();
-    updateFavCounter(); // Sayaç başlat
-    checkThemeOnLoad(); // Tema kontrolü
+    updateFavCounter(); 
+    checkThemeOnLoad(); 
   } catch (e) {
     console.error("Veri hatası:", e);
   }
@@ -54,7 +52,10 @@ function handleUIRender(list) {
   const container = document.getElementById("movieList");
   const search = document.getElementById("searchInput").value;
 
-  if (search || currentCategory !== "Tümü" || currentYear !== "Tümü" || currentSort !== "default") {
+  // Filtre aktifse veya favori sayfasındaysak Grid göster
+  const isFavPage = document.getElementById("activeFilters").innerHTML.includes("İzleme Listem");
+
+  if (search || currentCategory !== "Tümü" || currentYear !== "Tümü" || currentSort !== "default" || isFavPage) {
     container.className = "grid-container";
     renderStandardGrid(list);
   } else {
@@ -124,10 +125,10 @@ function renderNetflixRows() {
 function renderStandardGrid(list) {
   const container = document.getElementById("movieList");
   if (list.length === 0) {
-    container.innerHTML = `<div style="grid-column: 1/-1; text-align:center; padding:50px; color:var(--accent);">Kriterlere uygun film bulunamadı.</div>`;
+    container.innerHTML = `<div style="grid-column: 1/-1; text-align:center; padding:50px; color:var(--accent);">Gösterilecek film bulunamadı.</div>`;
     return;
   }
-  container.innerHTML = list.slice(0, displayedCount).map(movie => createMovieCardHTML(movie)).join('');
+  container.innerHTML = list.map(movie => createMovieCardHTML(movie)).join('');
 }
 
 function createMovieCardHTML(movie) {
@@ -167,8 +168,6 @@ function createDynamicCategories() {
 }
 
 /* -------------------- MODAL & FAVORİ -------------------- */
-// ... (Diğer fonksiyonlar aynı kalacak, sadece openDetails güncellendi)
-
 function openDetails(id) {
   const movie = allMovies.find(m => m.id === id);
   const modal = document.getElementById("detailsModal");
@@ -176,17 +175,16 @@ function openDetails(id) {
   
   modal.innerHTML = `
     <div class="modal-content">
-      <span class="close-btn" onclick="closeModal()" style="position:absolute; right:25px; top:15px; z-index:10; font-size:35px; cursor:pointer; color:#fff;">&times;</span>
+      <span class="close-btn" onclick="closeModal()">&times;</span>
       <div class="modal-header" style="background: url('${movie.image}')"></div>
       <div class="modal-body">
-        <h2 style="font-size: 2.8rem; margin: 0 0 10px 0; font-weight: 900;">${movie.title} (${movie.year})</h2>
-        <div style="display: flex; gap: 15px; margin-bottom: 20px; color: var(--accent); font-weight: bold; font-size: 1.1rem;">
+        <h2>${movie.title} (${movie.year})</h2>
+        <div class="modal-meta">
             <span>⭐ ${movie.rating} IMDb</span>
             <span>📂 ${movie.category}</span>
-            <span>📅 ${movie.year}</span>
         </div>
-        <p style="font-size: 1.15rem; line-height: 1.7; opacity: 0.9; margin-bottom: 30px; max-width: 800px;">${movie.description}</p>
-        <button class="play-btn" style="padding: 15px 40px; font-size: 1.1rem;">▶ Hemen İzle</button>
+        <p>${movie.description}</p>
+        <button class="play-btn">▶ Hemen İzle</button>
       </div>
     </div>
   `;
@@ -205,12 +203,41 @@ function toggleFavorite(id) {
   }
   localStorage.setItem("lynxFavs", JSON.stringify(favorites));
   updateFavCounter();
-  handleUIRender(getActiveList());
+
+  // Favori sayfasındaysak listeyi anlık güncelle
+  const isFavPage = document.getElementById("activeFilters").innerHTML.includes("İzleme Listem");
+  if (isFavPage) {
+    showFavorites();
+  } else {
+    handleUIRender(getActiveList());
+  }
 }
 
 function updateFavCounter() {
   const counter = document.getElementById("favCount");
   if(counter) counter.innerText = favorites.length;
+}
+
+function showFavorites() {
+  const favList = allMovies.filter(m => favorites.includes(m.id));
+  
+  // Diğer tüm filtreleri sıfırla
+  document.getElementById("searchInput").value = "";
+  currentCategory = "Tümü"; 
+  currentYear = "Tümü";
+  currentSort = "default";
+
+  // Favori başlığını (rozetini) yerleştir
+  document.getElementById("activeFilters").innerHTML = `<span class="filter-badge">❤️ İzleme Listem</span>`;
+
+  const container = document.getElementById("movieList");
+  container.className = "grid-container";
+  
+  if (favList.length === 0) {
+    container.innerHTML = `<div style="grid-column: 1/-1; text-align:center; padding:50px; color:var(--accent);">Listeniz şu an boş.</div>`;
+  } else {
+    renderStandardGrid(favList);
+  }
 }
 
 function showToast(msg) {
@@ -222,7 +249,7 @@ function showToast(msg) {
   setTimeout(() => toast.remove(), 2500);
 }
 
-/* -------------------- HERO YÖNETİMİ -------------------- */
+/* -------------------- HERO & TEMA -------------------- */
 function updateHero(movie) {
   const hero = document.getElementById("hero");
   if(!hero || !movie) return;
@@ -239,9 +266,7 @@ function setRandomHero() {
     updateHero(randomMovie);
 }
 
-/* -------------------- TEMA YÖNETİMİ -------------------- */
 function checkThemeOnLoad() {
-    const themeToggle = document.getElementById("themeToggle");
     const themeIcon = document.getElementById("themeIcon");
     if (localStorage.getItem("theme") === "light") {
         document.body.classList.add("light-mode");
@@ -254,22 +279,20 @@ if(themeToggle) {
     themeToggle.onclick = () => {
         document.body.classList.toggle("light-mode");
         const isLight = document.body.classList.contains("light-mode");
-        const themeIcon = document.getElementById("themeIcon");
-        
-        if(themeIcon) themeIcon.innerText = isLight ? "☀️" : "🌙";
+        document.getElementById("themeIcon").innerText = isLight ? "☀️" : "🌙";
         localStorage.setItem("theme", isLight ? "light" : "dark");
         
-        // Tema değişince Hero gradyanını güncellemek için tekrar çağır
+        // Hero gradyanını tema rengine göre tazele
         const currentHeroTitle = document.getElementById("hero-title").innerText;
         const currentMovie = allMovies.find(m => m.title === currentHeroTitle);
         if(currentMovie) updateHero(currentMovie);
-        
-        showToast(isLight ? "Aydınlık Mod Aktif ☀️" : "Karanlık Mod Aktif 🌙");
     };
 }
 
 /* -------------------- SEARCH & SCROLL -------------------- */
 document.getElementById("searchInput").addEventListener("input", () => {
+  // Arama yaparken favori rozetini kaldır
+  document.getElementById("activeFilters").innerHTML = "";
   handleUIRender(getActiveList());
 });
 
