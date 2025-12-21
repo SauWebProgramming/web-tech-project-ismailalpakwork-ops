@@ -302,3 +302,23 @@ window.addEventListener("scroll", () => {
 });
 
 getMovies();
+
+/* -------------------- YUKARI ÇIK BUTONU MANTIĞI -------------------- */
+const scrollBtn = document.getElementById("scrollTop");
+
+// Sayfa kaydırıldıkça butonu göster/gizle
+window.onscroll = function() {
+  if (document.body.scrollTop > 400 || document.documentElement.scrollTop > 400) {
+    scrollBtn.style.display = "flex";
+  } else {
+    scrollBtn.style.display = "none";
+  }
+};
+
+// Butona tıklandığında yumuşakça yukarı çık
+scrollBtn.onclick = function() {
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth" // Yumuşak geçiş efekti
+  });
+};
