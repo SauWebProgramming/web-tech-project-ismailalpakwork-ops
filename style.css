@@ -359,39 +359,28 @@ img {
     to { opacity: 0.3; transform: translateY(-10px); }
 }
 #scrollTop {
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    width: 50px;
-    height: 50px;
-    background: var(--accent);
-    color: black;
-    border: none;
-    border-radius: 50%;
-    font-size: 24px;
-    font-weight: bold;
-    cursor: pointer;
-    display: none; /* Başlangıçta gizli */
-    justify-content: center;
-    align-items: center;
-    z-index: 9999;
-    box-shadow: 0 4px 15px rgba(83, 252, 24, 0.4);
-    transition: var(--transition);
+    position: fixed; bottom: 30px; right: 30px;
+    width: 50px; height: 50px;
+    background: var(--accent); color: black;
+    border: none; border-radius: 50%;
+    font-size: 20px; font-weight: bold;
+    cursor: pointer; display: none; /* Scroll başlayınca görünecek */
+    box-shadow: 0 0 20px rgba(83, 252, 24, 0.4);
+    z-index: 1000; transition: 0.3s;
+}
+#scrollTop:hover { transform: scale(1.1); }
+
+button:focus,
+input:focus {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
 }
 
-#scrollTop:hover {
-    transform: translateY(-5px) scale(1.1);
-}
-
-/* Mobilde butonu biraz daha küçültelim */
 @media (max-width: 768px) {
-    #scrollTop {
-        bottom: 20px;
-        right: 20px;
-        width: 45px;
-        height: 45px;
+    nav {
+        flex-direction: column;
+        gap: 15px;
     }
-}
 
     input {
         width: 100%;
@@ -634,3 +623,32 @@ body.light-mode .card:hover {
     box-shadow: 0 15px 30px rgba(0,0,0,0.1); /* Neon yerine hafif gölge */
 }
 
+.type-filters {
+    display: flex;
+    gap: 10px;
+    margin: 0 20px;
+}
+
+.type-btn {
+    background: var(--gray);
+    color: var(--text);
+    border: 1px solid rgba(255,255,255,0.1);
+    padding: 6px 18px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-weight: 600;
+    transition: var(--transition);
+}
+
+.type-btn.active {
+    background: var(--accent);
+    color: #000;
+    border-color: var(--accent);
+    box-shadow: 0 0 15px rgba(83, 252, 24, 0.3);
+}
+
+/* Mobilde sığması için */
+@media (max-width: 768px) {
+    .type-filters { margin: 10px 0; order: 2; }
+}

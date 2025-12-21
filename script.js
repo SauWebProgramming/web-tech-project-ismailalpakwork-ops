@@ -1,3 +1,5 @@
+
+let currentType = "all";
 let allMovies = [];
 let favorites = JSON.parse(localStorage.getItem("lynxFavs")) || [];
 
@@ -24,12 +26,22 @@ async function getMovies() {
 }
 
 /* -------------------- AKILLI FİLTRELEME MANTIĞI -------------------- */
+/* -------------------- AKILLI FİLTRELEME MANTIĞI -------------------- */
 function getActiveList() {
   const search = document.getElementById("searchInput").value.toLowerCase();
   let list = [...allMovies];
 
-  if (currentCategory !== "Tümü") list = list.filter(m => m.category === currentCategory);
+  // 1. Tip Filtresi (Film mi? Dizi mi?) - En başa ekledik
+  if (currentType !== "all") {
+    list = list.filter(m => m.type === currentType);
+  }
 
+  // 2. Kategori Filtresi
+  if (currentCategory !== "Tümü") {
+    list = list.filter(m => m.category === currentCategory);
+  }
+
+  // 3. Yıl Filtresi
   if (currentYear !== "Tümü") {
     if (currentYear === "2020+") list = list.filter(m => m.year >= 2020);
     else if (currentYear === "2010-2019") list = list.filter(m => m.year >= 2010 && m.year <= 2019);
@@ -37,8 +49,12 @@ function getActiveList() {
     else if (currentYear === "90s") list = list.filter(m => m.year < 2000);
   }
 
-  if (search) list = list.filter(m => m.title.toLowerCase().includes(search));
+  // 4. Arama Filtresi
+  if (search) {
+    list = list.filter(m => m.title.toLowerCase().includes(search));
+  }
 
+  // 5. Sıralama Mantığı
   if (currentSort === "rating") list.sort((a, b) => b.rating - a.rating);
   else if (currentSort === "newest") list.sort((a, b) => b.year - a.year);
   else if (currentSort === "oldest") list.sort((a, b) => a.year - b.year);
@@ -46,7 +62,6 @@ function getActiveList() {
 
   return list;
 }
-
 /* -------------------- UI YÖNETİCİSİ -------------------- */
 function handleUIRender(list) {
   const container = document.getElementById("movieList");
@@ -322,3 +337,20 @@ scrollBtn.onclick = function() {
     behavior: "smooth" // Yumuşak geçiş efekti
   });
 };
+
+function setType(type) {
+    currentType = type;
+    
+    // Butonların aktiflik (yeşil renk) durumunu güncelle
+    document.querySelectorAll('.type-btn').forEach(btn => {
+        btn.classList.remove('active');
+        const text = btn.innerText.toLowerCase();
+        if ((type === 'all' && text === 'hepsi') || 
+            (type === 'movie' && text === 'filmler') || 
+            (type === 'series' && text === 'diziler')) {
+            btn.classList.add('active');
+        }
+    });
+
+    handleUIRender(getActiveList());
+}

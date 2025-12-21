@@ -13,14 +13,20 @@
     <nav>
         <div class="logo" id="logo" onclick="location.reload()">LynxMovie</div>
         
+        <div class="type-filters">
+            <button class="type-btn active" onclick="setType('all')">Hepsi</button>
+            <button class="type-btn" onclick="setType('movie')">Filmler</button>
+            <button class="type-btn" onclick="setType('series')">Diziler</button>
+        </div>
+
         <div class="search-bar">
             <input type="text" id="searchInput" placeholder="Film veya dizi ara...">
         </div>
 
         <div class="nav-btns">
             <button id="favBtn" class="premium-btn" onclick="showFavorites()">
-    ❤️ Listem <span id="favCount" class="badge-counter">0</span>
-</button>
+                ❤️ Listem <span id="favCount" class="badge-counter">0</span>
+            </button>
             
             <button id="themeToggle" class="theme-btn" aria-label="Tema Değiştir">
                 <span id="themeIcon">🌙</span>
@@ -53,17 +59,16 @@
             <button onclick="setYear('2020+')">2020 ve Sonrası</button>
             <button onclick="setYear('2010-2019')">2010 - 2019</button>
             <button onclick="setYear('2000-2009')">2000 - 2009</button>
-            <button onclick="setYear('90s')">90'lar ve Öncesi</button>
+            <button onclick="setYear('90s')">90'lar</button>
         </div>
     </div>
 
     <div class="dropdown">
         <button class="dropbtn">🔃 Sırala ▼</button>
         <div class="dropdown-content">
-            <button onclick="setSort('rating')">⭐ En Yüksek Puan</button>
-            <button onclick="setSort('newest')">🆕 En Yeni</button>
-            <button onclick="setSort('oldest')">⏳ En Eski</button>
-            <button onclick="setSort('alpha')">🔤 A - Z</button>
+            <button onclick="setSort('rating')">⭐ Puan</button>
+            <button onclick="setSort('newest')">🆕 Yeni</button>
+            <button onclick="setSort('alpha')">🔤 A-Z</button>
         </div>
     </div>
 
@@ -76,8 +81,8 @@
 
 <div id="detailsModal" class="modal-overlay"></div>
 
-<button id="scrollTop">↑</button>
 <button id="scrollTop" title="Yukarı Çık">↑</button>
+
 <script src="script.js"></script>
 </body>
 </html>
